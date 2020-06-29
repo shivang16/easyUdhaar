@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const transactionScheme = new mongoose.Schema({
-    lenderId:{
+    sender:{
         type:  mongoose.Schema.Types.ObjectId,
         required:true
     },
-    borrowerId:{
+    reciver:{
         type:  mongoose.Schema.Types.ObjectId,
         required:true
     },
@@ -17,6 +17,12 @@ const transactionScheme = new mongoose.Schema({
         type: Date,
         default: Date.now(),
         required:true
+    },
+    lendingId:{
+        type:mongoose.Schema.Types.ObjectId
+    },
+    campaignId:{
+        type:mongoose.Schema.Types.ObjectId
     }    
 
 });

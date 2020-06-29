@@ -30,13 +30,18 @@ const lenderScheme = new mongoose.Schema({
         type:Date,
         default:Date.now()
     },
-    lendingDone:{   // Shows if we got full repayment or not
+    finalEndDate:{
+        type:Date,
+        default:Date.now()
+    },
+    repaymentDone:{   // Shows if we got full repayment or not
         type:Boolean,
         default:false
-    }
-
-
-
+    },
+    lendingStarted:{
+        type:Boolean,
+        default:false
+    },
 });
 
 module.exports = mongoose.model('Lender',lenderScheme);

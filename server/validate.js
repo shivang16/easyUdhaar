@@ -9,7 +9,7 @@ const registrationValidate = function(data){
         lastName: Joi.string().max(255).required(),
         email: Joi.string().min(6).max(255).required().email(),
         password: Joi.string().max(1024).required(),
-        address: Joi.string().required()
+        password1 : Joi.string().max(1024).required()
     });
 
     //Validating the user before use
@@ -30,6 +30,65 @@ const loginValidate  = function(data){
     const {error} = schema.validate(data);
     if(error) return error.details[0].message;
 };
+
+// Edit Profile
+
+
+const editValidate = function (data) {
+    const schema = Joi.object({
+        gender: Joi.string(),
+        aadharNo: Joi.string().min(12).max(12),
+        panNo: Joi.string().min(10).max(10),
+        occupation: Joi.string(),
+        accountNo: Joi.string().min(16).max(16),
+        cardExpiry: Joi.string(),
+        address:Joi.string()
+    });
+    
+    //Validating the user before use
+    const {error} = schema.validate(data);
+    if(error) return error.details[0].message;
+    
+
+}
+
+
+
+
+
+// Profile Validate
+
+const profileValidate = function (data) {
+    const schema = Joi.object({
+        gender: Joi.string().required(),
+        aadharNo: Joi.string().min(12).max(12).required(),
+        panNo: Joi.string().min(10).max(10).required(),
+        occupation: Joi.string().required(),
+        accountNo: Joi.string().min(16).max(16).required(),
+        balance: Joi.number(),
+        cardExpiry: Joi.string(),
+        address:Joi.string().required()
+    });
+    
+    //Validating the user before use
+    const {error} = schema.validate(data);
+    if(error) return error.details[0].message;
+    
+
+}
+
+// Phone Number Validation
+const phoneValidate = function (data) {
+    const schema = Joi.object({
+        number:Joi.string().min(12).max(12).required()
+    });
+    
+    //Validating the user before use
+    const {error} = schema.validate(data);
+    if(error) return error.details[0].message;
+    
+
+}
 
 
 // Campaign Validation
@@ -53,7 +112,7 @@ const businessQuestionValidate = function(data) {
         employes: Joi.number().required(),
         skilledEmployes:Joi.number().required(),
         customerFacingBToB: Joi.number().required(),
-        goods: Joi.bool().required(),
+        job: Joi.number(),
         placeOwned: Joi.bool().required(),
         yearsRunning: Joi.number().required(),
         cashMajority: Joi.bool().required(),
@@ -119,4 +178,4 @@ const lenderValidate = function (data) {
 
 module.exports = {registrationValidation: registrationValidate, loginValidation: loginValidate,campaignValidation:campaignValidate,
     businessQuestionValidation: businessQuestionValidate,personalQuestionValidation:personalQuestionValidate,
-    lenderValidation:lenderValidate}
+    lenderValidation:lenderValidate,profileValidation:profileValidate, phoneValidation:phoneValidate, editValidation:editValidate}

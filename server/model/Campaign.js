@@ -24,7 +24,7 @@ const campaignScheme = new mongoose.Schema({
     },
     amountDue:{   // Amount to be paid
         type:Number,
-        required:true
+        default:0
     },
     amountPaid:{  // Amount already paid
         type:Number,
@@ -34,13 +34,13 @@ const campaignScheme = new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    loanApprovedDate:{ // Loan approve date (when we get money)
-        type:Date,
-        default:Date.now()
-    },
     lastDate:{   // Late date of payment
         type:Date,
         default:Date.now()
+    },
+    running:{   // Check if all money is recieved or not
+        type:Boolean,
+        default:true
     }
 
 });

@@ -25,7 +25,6 @@ const userScheme = new mongoose.Schema({
     },
     address:{
         type: String,
-        required:true,
         max: 255
     },
     dob:{
@@ -55,13 +54,26 @@ const userScheme = new mongoose.Schema({
         max:10,
         default: null
     },
-    creditScore:{
+    creditScoreBusiness:{
         type: Number,
-        default:500,
+        default:400,
+    },
+    creditScorePersonal:{
+        type:Number,
+        default:300
     },
     job:{
         type: String,
         default: null
+    },
+    accountNo:{
+        type:String,
+        min:16,
+        max:16
+    },
+    balance:{
+        type:Number,
+        default:0
     },
     phoneVerified:{
         type:Boolean,
@@ -72,6 +84,26 @@ const userScheme = new mongoose.Schema({
         default:false
     },
     profileVerified:{
+        type:Boolean,
+        default:false
+    },
+    cardExpiry:{
+        type:String,
+        default:"2021-10"
+    },
+    previousLoan:{
+        type:Date,
+        default:Date.now()
+    },
+    businessLoan:{
+        type:Boolean,
+        default:false
+    },
+    personalLoan:{
+        type:Boolean,
+        default:false
+    },
+    defaulter:{
         type:Boolean,
         default:false
     }

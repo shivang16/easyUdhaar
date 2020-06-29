@@ -12,7 +12,8 @@ const nexmo = new Nexmo({
 });
 
 router.get('/profile',verify,async (req,res)=>{
-    //check if profile is verified
+    
+  //check if profile is verified
     const currentUser = await User.findOne({_id:req.user._id});
     
     if(currentUser.profileVerified == false) 
@@ -34,13 +35,20 @@ router.post('/profile',verify,async(req,res)=>{
             console.log("User Not Found! " + err);
         }
         else{
-
             // Validation is required first add validation of input!!!
+              const validate_check = validator.profileValidation(req.body);
+              if(validate_check) return res.status(400).send(validate_check);
+
+
 
             currentUser.gender = req.body.gender;
             currentUser.aadharNo = req.body.aadharNo;
             currentUser.panNo = req.body.panNo;
             currentUser.occupation = req.body.occupation;
+            currentUser.accountNo = req.body.accountNo;
+            currentUser.balance = req.body.balance;
+            currentUser.cardExpiry = req.body.cardExpiry;
+            currentUser.address = req.body.address;
             currentUser.save(function (err1) {
                 if(err){
                     console.log("Not Able to save!")
@@ -63,6 +71,7 @@ router.get('/phone',verify,async (req,res)=>{
     // Here we have phone number entering form. 
     const currentUser = await User.findOne({_id:req.user._id});
     if(currentUser.phoneVerified==false){
+      res.send("phone number not verified");
         // input phone number and send it to post /phone/register 
     }
     else{
@@ -74,10 +83,16 @@ router.post('/phone/register',verify,async (req,res)=>{
     
     // A user registers with a mobile phone number
     let phoneNumber = req.body.number;
-  
-    console.log(phoneNumber);
-  
-    nexmo.verify.request({number: phoneNumber, brand: 'VISA Company'}, (err, result) => {
+    
+    // Validating phone number
+    const validate_check = validator.phoneValidation(req.body);
+    if(validate_check) return res.status(400).send(validate_check);
+
+    // check if phone number is already verified
+    const checkPhone = await User.findOne({phoneNo:phoneNumber});
+    if(checkPhone == null) res.send("Phone Number already exist");
+    
+    nexmo.verify.request({number: phoneNumber, brand: 'easyUdhar'}, (err, result) => {
       if(err) {
         console.log(err);
   
@@ -108,6 +123,7 @@ router.post('/phone/check',verify,(req,res)=>{
     //To verify the phone number the request ID and code are required.
     let code = req.body.code;
     let requestId = req.body.requestId;
+    const phoneNo = req.body.phoneNo;
   
     console.log("Code: " + code + " Request ID: " + requestId);
   
@@ -123,7 +139,6 @@ router.post('/phone/check',verify,(req,res)=>{
         if(result && result.status == '0') {
           //A status of 0 means success! Respond with 200: OK
           res.status(200).send(result);
-          console.log('Account verified!');
           User.findOne({_id:req.user._id},(err,user)=>{
               if(err){
                   console.log("Error finding user: "+err);
@@ -131,11 +146,15 @@ router.post('/phone/check',verify,(req,res)=>{
               else{
                   user.phoneVerified = true;
                   user.profileVerified = true;
+                  user.phoneNo = phoneNo;
                   user.save(function(err){
                       if(err){
                           console.log("Error in Saving: " + err);
                       }
                       else{
+                          
+                          res.end("Account Verified!");
+                          console.log('Account verified!');
                           console.log("Done!!");
                       }
                   })

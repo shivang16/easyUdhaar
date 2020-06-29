@@ -18,6 +18,8 @@ const newCampaign = require('./routes/newCampaign');
 const verification = require('./routes/verification');
 const newLender = require('./routes/newLending');
 const transaction = require('./routes/transactionHistory');
+const payment = require('./routes/payment');
+const repayment = require('./routes/repayment');
 
 app.use(express.json());
 
@@ -28,6 +30,10 @@ app.use('/newCampaign',newCampaign);
 app.use('/verification',verification);
 app.use('/newLending',newLender);
 app.use('/transaction',transaction);
+app.use('/payment',payment);
+app.use('/pr',privateRoute);
+app.use('/repayment',repayment);
+
 
 app.get('/',function(req,res){
     res.send("Yoo");
