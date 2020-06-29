@@ -12,7 +12,7 @@ console.log("DB CONNECTED!!");
 
 //Import Routes
 const authRoute = require('./routes/auth.js');
-// const privateRoute = require('./routes/private_route');
+const privateRoute = require('./routes/private_route');
 const dashboard = require('./routes/dashboard');
 const newCampaign = require('./routes/newCampaign');
 const verification = require('./routes/verification');
@@ -31,7 +31,7 @@ app.use('/verification',verification);
 app.use('/newLending',newLender);
 app.use('/transaction',transaction);
 app.use('/payment',payment);
-// app.use('/pr',privateRoute);
+app.use('/pr',privateRoute);
 app.use('/repayment',repayment);
 
 

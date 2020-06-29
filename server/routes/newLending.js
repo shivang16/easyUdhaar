@@ -8,6 +8,7 @@ const  validator = require('../validate');
 const rp = require('request-promise');
 const Transaction = require('../model/Transaction')
 
+
 router.post('/',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
@@ -56,15 +57,20 @@ router.post('/',verify,async (req,res)=>{
         lender.amountToBeRecieved = amountGiven;
         lender.dateLending = Date.now();
         lender.lendingStarted = true;
-        //    lender.endDate = present_date.setMon 
-        //    lender.finalEndDate = 
-    //    Amount expected in given campaign will reduce!
-        currectCampaign.amountExpected = currectCampaign.amountExpected-amountGiven;
+        // var currentDate = new Date(Date.now());
+        // currentDate.setMonth(currentDate.getMonth()+currectCampaign.duration);
+        // lender.endDate = currentDate;
+        // currentDate.setMonth(currentDate.getMonth()+6);
+    //    lender.finalEndDate = currectDate;
+    
+           //   Amount expected in given campaign will reduce!
+        currectCampaign.amountExpected -= amountGiven;
         if(currectCampaign.amountExpected==0)
         {
             currectCampaign.running = false;
         }
-        currectCampaign.amountDue = currectCampaign.amountDue + amountGiven;
+        currectCampaign.amountDue += amountGiven;
+        currectCampaign.amountGet += amountGiven;
 
         // After Payment updating values
         let lenderModel = new Lender(lender);

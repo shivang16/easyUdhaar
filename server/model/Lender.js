@@ -42,6 +42,10 @@ const lenderScheme = new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    lastUpdated:{
+        type:Date,
+        default:Date.now()
+    }
 });
 
 module.exports = mongoose.model('Lender',lenderScheme);

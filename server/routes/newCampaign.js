@@ -21,7 +21,7 @@ router.post('/business',verify,async (req,res)=>{
 
 
     // Fetching data from body
-    const {amountExpected,lastDate,businessIncome,employes,skilledEmployes,customerFacingBToB,
+    const {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
     job,placeOwned,yearsRunning,cashMajority,currentBalance,assetValue,age,duration,checkingAccount} = req.body;   // Here we don't need to add borrowerId it can be taken form token
     
     
@@ -43,7 +43,8 @@ router.post('/business',verify,async (req,res)=>{
         campaign.loanType = 1;
         campaign.amountExpected = amountExpected;
         campaign.loanInterest = 5;
-        campaign.amountDue = amountExpected;
+        campaign.amount = amountExpected;
+        campaign.duration = duration;
 
         // Loan Questions and credit Score API
         const Questions = {
@@ -143,7 +144,7 @@ router.post('/personal',verify,async (req,res)=>{
 
 
     // Fetching data from body
-    const {amountExpected,lastDate,eatOut,nearestMajorCity,annualIncome,checkingAccount,savingAccount,
+    const {amountExpected,eatOut,nearestMajorCity,annualIncome,checkingAccount,savingAccount,
         jobStatus,lastTravel,vechicles,age,sex,houseType,cellBill,familyMembers,earningMembers,duration,
         cibilScore,internetDevices,literateAdults,purpose} = req.body;   // Here we don't need to add borrowerId it can be taken form token
     
@@ -166,8 +167,8 @@ router.post('/personal',verify,async (req,res)=>{
         campaign.loanType = 2;
         campaign.amountExpected = amountExpected;
         campaign.loanInterest = 7;
-        campaign.amountDue = amountExpected;
-
+        campaign.amount = amountExpected;
+        campaign.duration = duration;
 
         // Loan Questions and credit Score API
         const Questions = {

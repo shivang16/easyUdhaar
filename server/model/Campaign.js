@@ -14,9 +14,17 @@ const campaignScheme = new mongoose.Schema({
         default: Date.now(),
         required:true
     },
-    amountExpected:{ // AMount we are applying for 
+    amount:{   // Inital amount wanted
+        type:Number,
+        default:0
+    },
+    amountExpected:{ // Amount need now
         type:Number,
         required:true
+    },
+    amountGet:{   // Amount get till now
+        type:Number,
+        default:0
     },
     loanInterest:{   // Interest based on type of loan
         type:Number,
@@ -34,15 +42,18 @@ const campaignScheme = new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    lastDate:{   // Late date of payment
-        type:Date,
-        default:Date.now()
-    },
     running:{   // Check if all money is recieved or not
         type:Boolean,
         default:true
+    },
+    duration:{  // Months 
+        type:Number,
+        default:0
+    },
+    lastUpdated:{
+        type:Date,
+        default:Date.now()
     }
-
 });
 
 module.exports = mongoose.model('Campaign',campaignScheme);

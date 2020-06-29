@@ -65,7 +65,7 @@ router.post('/',verify,async (req,res)=>{
 
         function getParameters_push() {
             var parameters = {
-                "x-client-transaction-id": "f54evcww423xf54cw4rc",
+                "x-client-transaction-id": "f54evcwwqrqc1423xf54cw4rc",
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             };
