@@ -63,31 +63,32 @@ const SignIn = (props) => {
     const user = {
       email: values.email || undefined,
       password: values.password || undefined
-    }
+    };
 
     signin(user).then((data) => {
       if (data.error) {
-        setValues({ ...values, error: data.error})
+        setValues({ ...values, error: data.error});
       } else {
+        console.log("idhar toh aa gye");
         auth.authenticate(data, () => {
           setValues({ ...values, error: '',redirectToReferrer: true})
-        })
+        });
       }
-    })
-  }
+    });
+  };
 
   const handleChange = name => event => {
     setValues({ ...values, [name]: event.target.value })
-  }
+  };
 
   const {from} = props.location.state || {
       from: {
         pathname: '/dashboard'
       }
-  }
+  };
   const {redirectToReferrer} = values
   if (redirectToReferrer) {
-      return (<Redirect to={from}/>)
+      return (<Redirect to={from}/>);
   }
   
 

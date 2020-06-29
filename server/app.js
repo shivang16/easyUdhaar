@@ -54,7 +54,7 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 // Adding Middleware
 app.use('/user',authRoute);
-app.use('/dashboard',dashboard);
+app.use('/dashboard1',dashboard);
 app.use('/newCampaign',newCampaign);
 app.use('/verification',verification);
 app.use('/newLending',newLender);
