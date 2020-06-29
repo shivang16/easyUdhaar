@@ -146,9 +146,19 @@ router.post('/login',async (req,res)=>{
 
     const token = jwt.sign({_id:selected_user._id},process.env.TOKEN_SECRET);
     //console.log(token);
-    
+    // res.cookie("t", token, {
+    //     expires: new Date() + 9999
+    // })
+    // console.log(selected_user.firstName);
+    // return res.json({
+    //     token,
+    //     user: {
+    //         _id: selected_user._id,
+    //         name: selected_user.firstName + " " + selected_user.lastName,
+    //         email: selected_user.email
+    //     }
+    // })
     res.send(token);
-    
 
 });
 
