@@ -68,10 +68,8 @@ router.post('/',verify,async (req,res)=>{
         transaction.date = Date.now();
         transaction.lendingId = lendingId; // We have repayed so it will show to which lender we have paid
         let transactionModel = new Transaction(transaction);
-        console.log("Boo");
         await transactionModel.save();
         await campaignOwner.save();
-        console.log("Hoi");
         res.send(currentLending);
    })
    .catch(function (err) {
