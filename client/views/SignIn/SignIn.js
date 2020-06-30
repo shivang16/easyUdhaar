@@ -59,7 +59,8 @@ const SignIn = (props) => {
     redirectToReferrer: false
   });
 
-  const clickSubmit = () => {
+  const clickSubmit = (event) => {
+    event.preventDefault();
     const user = {
       email: values.email || undefined,
       password: values.password || undefined
