@@ -70,7 +70,20 @@ const SignIn = (props) => {
       if (data.error) {
         setValues({ ...values, error: data.error});
       } else {
+        console.log(data);
         console.log("idhar toh aa gye");
+        if(data == "IP")
+        {
+          alert("Wrong password");
+        }
+        else if(data == "ENV")
+        {
+          alert("Email Not verified");
+        }
+        else if(data == "UNR")
+        {
+          alert("User Not registered");
+        }
         auth.authenticate(data, () => {
           setValues({ ...values, error: '',redirectToReferrer: true})
         });

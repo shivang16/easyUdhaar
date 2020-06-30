@@ -49,7 +49,7 @@ if((req.protocol+"://"+req.get('host')+'/user')==("http://"+host))
             }
         });
 
-        res.end("<h1>Email "+mailOptions.to+" is been Successfully verified");
+        res.end("<h1>Email "+mailOptions.to+" is been Successfully verified</h1>");
     }
     else
     {
@@ -61,7 +61,7 @@ if((req.protocol+"://"+req.get('host')+'/user')==("http://"+host))
 else
 {
     await user.remove();
-    res.end("<h1>Request is from unknown source");
+    res.end("<h1>Request is from unknown source</h1>");
 }
 });
 
@@ -85,7 +85,7 @@ router.post('/register',async (req,res)=>{
     // Hashing password
     
     // Creating New User And saving in Database
-    const {firstName,lastName,email,password,dob,accountNo,cardExpiry,balance,accountType} = req.body;
+    const {firstName,lastName,email,password,dob,accountNo,aadharNo,panNo,phoneNo,balance,accountType,} = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
     // email1=email;
@@ -114,7 +114,9 @@ router.post('/register',async (req,res)=>{
             user.email = email;
             user.password =  hashedPassword;
             user.accountNo = accountNo;
-            user.cardExpiry = cardExpiry;
+            user.aadharNo = aadharNo;
+            user.panNo = panNo;
+            user.phoneNo = phoneNo;
             user.balance = balance;
             user.accountType = accountType;
             // user.dob = dob;
@@ -139,14 +141,14 @@ router.post('/login',async (req,res)=>{
 
     // Checking if user not registered 
     const selected_user = await User.findOne({email:req.body.email});
-    if(!selected_user) return res.status(400).send("User Not Registered");
+    if(!selected_user) return res.status(400).json("UNR");
 
     // Checking if email is register or not
-    if(selected_user.emailVerified==false) return res.status(400).send("Verify email first!");
+    if(selected_user.emailVerified==false) return res.status(400).json("ENV");
 
     // Verifying Password
     const validPassword = await bcrypt.compare(req.body.password,selected_user.password);
-    if(!validPassword) return res.status(400).send("Invalid Password");
+    if(!validPassword) return res.status(400).json("IP");
 
 
     const token = jwt.sign({_id:selected_user._id},process.env.TOKEN_SECRET);

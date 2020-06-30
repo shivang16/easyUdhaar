@@ -10,7 +10,9 @@ const registrationValidate = function(data){
         email: Joi.string().min(6).max(255).required().email(),
         password: Joi.string().max(1024).required(),
         accountNo: Joi.string().min(16).max(16).required(),
-        cardExpiry: Joi.string().required(),
+        aadharNo : Joi.string().min(12).max(12).required(),
+        panNo: Joi.string().min(10).max(10).required(),
+        phoneNo: Joi.string().min(12).max(12).required(),
         balance: Joi.number().required(),
         accountType: Joi.bool()
         // password1 : Joi.string().max(1024).required()
