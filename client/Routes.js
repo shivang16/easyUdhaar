@@ -1,11 +1,10 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
-import { RouteWithLayout } from './components';
+import { RouteWithLayout, PrivateRoute } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
   Dashboard as DashboardView,
-  UserList as UserListView,
   Account as AccountView,
   Settings as SettingsView,
   SignUp as SignUpView,
@@ -24,37 +23,31 @@ const Routes = () => {
         from="/"
         to="/sign-in"
       />
-      <RouteWithLayout
+      <PrivateRoute
         component={DashboardView}
         exact
         layout={MainLayout}
         path="/dashboard"
       />
-      <RouteWithLayout
+      <PrivateRoute
         component={BusinessLoanView}
         exact
         layout={MainLayout}
         path="/business-loan"
       />
-      <RouteWithLayout
+      <PrivateRoute
         component={PersonalLoanView}
         exact
         layout={MainLayout}
         path="/personal-loan"
       />
-      <RouteWithLayout
-        component={UserListView}
-        exact
-        layout={MainLayout}
-        path="/users"
-      />
-      <RouteWithLayout
+      <PrivateRoute
         component={AccountView}
         exact
         layout={MainLayout}
         path="/account"
       />
-      <RouteWithLayout
+      <PrivateRoute
         component={SettingsView}
         exact
         layout={MainLayout}
