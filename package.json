@@ -2,7 +2,6 @@
   "name": "easyudhaar",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "development": "nodemon",
     "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
@@ -12,6 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/NITT-Ctrl-Alt-Defeat/easyUdhaar.git"
   },
+  "engines": {
+    "node": "13.12.0",
+    "npm": "6.14.4"
+  },
+  "main": "./dist/server.generated.js",
   "author": "",
   "license": "ISC",
   "bugs": {

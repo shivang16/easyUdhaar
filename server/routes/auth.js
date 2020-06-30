@@ -9,7 +9,7 @@ var app=express();
 const rp = require('request-promise');
 const verify = require('./verifyToken');
 const { async } = require('q');
-
+const getEmailTemplate = require('../email-template');
 // This file contains login and signup router
 
 //Here we are configuring our SMTP Server details.
@@ -97,7 +97,7 @@ router.post('/register',async (req,res)=>{
     mailOptions={
         to : email1,
         subject : "Please confirm your Email account",
-        html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>" 
+        html : getEmailTemplate(link) 
     }
 
     console.log(mailOptions);
