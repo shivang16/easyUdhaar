@@ -17,6 +17,9 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import { signup } from '../../auth/api-user';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl'
 
 function Copyright() {
   return (
@@ -62,6 +65,12 @@ const SignUp = () => {
     email: '',
     password: '',
     dob: '',
+    role: '',
+    aadhaar: '',
+    pan: '',
+    account: '',
+    phone: '',
+    balance: '',
     open: false,
     error: ''
   });
@@ -77,17 +86,17 @@ const SignUp = () => {
       lastName: values.lastName || undefined,
       email: values.email || undefined,
       password: values.password || undefined
-      // dob: values.dob || undefined
     };
+    console.log(values);
     // JSON.parse(JSON.stringify(user));
-    signup(user).then((data) => {
-      if(data.error) {
-        setValues({ ...values, error: data.error });
-      }
-      else {
-        setValues({ ...values, error: '', open: true });
-      }
-    });
+    // signup(user).then((data) => {
+    //   if(data.error) {
+    //     setValues({ ...values, error: data.error });
+    //   }
+    //   else {
+    //     setValues({ ...values, error: '', open: true });
+    //   }
+    // });
   };
 
   return (
@@ -153,6 +162,18 @@ const SignUp = () => {
               />
             </Grid>
             <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+            </Grid>
+            <Grid item xs={12}>
                 <TextField 
                     varient="outlined"
                     required
@@ -165,6 +186,84 @@ const SignUp = () => {
                     }}
                     onChange={handleChange('dob')}
                 />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl variant="outlined">
+                <InputLabel htmlFor="outlined-age-native-simple">Role</InputLabel>
+                <Select
+                  native
+                  onChange={handleChange}
+                  label="Role"
+                  inputProps={{
+                    name: 'role',
+                    id: 'outlined-age-native-simple',
+                  }}
+                >
+                  <option aria-label="None" value="" />
+                  <option value={false}>Lender</option>
+                  <option value={true}>Borrower</option>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="aadhaar"
+                label="Aadhaar Card Number"
+                name="aadhaar"
+                autoComplete="aadhaar"
+                onChange={handleChange('aadhaar')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="pan"
+                label="Pan Card Number"
+                name="pan"
+                autoComplete="pan"
+                onChange={handleChange('pan')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="account"
+                label="Account Number"
+                name="account"
+                autoComplete="account"
+                onChange={handleChange('account')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="phone"
+                label="Mobile Number"
+                name="phone"
+                autoComplete="phone"
+                onChange={handleChange('phone')}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="balance"
+                label="Current Balance"
+                name="balance"
+                autoComplete="balance"
+                onChange={handleChange('balance')}
+              />
             </Grid>
           </Grid>
           <br/> {
