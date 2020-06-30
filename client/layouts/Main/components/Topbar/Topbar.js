@@ -8,7 +8,8 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputIcon from '@material-ui/icons/Input';
 import Button from '@material-ui/core/Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import auth from './../../../../auth/auth-helper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Topbar = props => {
+const Topbar = ({ history }, props) => {
   const { className, onSidebarOpen, ...rest } = props;
 
   const classes = useStyles();
@@ -83,6 +84,7 @@ const Topbar = props => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={() => { auth.clearJWT(() => history.push('/sign-in')) }}
           >
             <InputIcon />
           </IconButton>
@@ -105,4 +107,4 @@ Topbar.propTypes = {
   onSidebarOpen: PropTypes.func
 };
 
-export default Topbar;
+export default withRouter(Topbar);
