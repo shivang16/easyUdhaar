@@ -70,7 +70,11 @@ router.post('/register',async (req,res)=>{
     
     //Validation
     const validate_check = validator.registrationValidation(req.body);
-    if(validate_check) return res.status(400).send(validate_check);
+    if(validate_check) 
+    {
+        console.log(validate_check);
+        return res.status(400).json(validate_check);
+    }
     
     
     //Checking if user already exist in Database

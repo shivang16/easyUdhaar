@@ -98,7 +98,16 @@ const SignUp = () => {
         setValues({ ...values, error: data.error });
       }
       else {
-        setValues({ ...values, error: '', open: true });
+        if(data!="Email sent!!")
+        {
+          alert(data);
+          return (<Redirect to="/sign-up"/>);
+        }
+        else
+        {
+          setValues({ ...values, error: '', open: true });
+        }
+        
       }
     });
   };

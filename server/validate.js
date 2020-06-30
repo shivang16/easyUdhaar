@@ -20,7 +20,11 @@ const registrationValidate = function(data){
 
     //Validating the user before use
     const {error} = schema.validate(data);
-    if(error) return error.details[0].message;
+    if(error) 
+    {
+       // console.log(error);
+        return error.details[0].message;
+    }
 }
 
 
