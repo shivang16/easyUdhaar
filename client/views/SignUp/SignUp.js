@@ -85,18 +85,23 @@ const SignUp = () => {
       firstName: values.firstName || undefined,
       lastName: values.lastName || undefined,
       email: values.email || undefined,
-      password: values.password || undefined
+      password: values.password || undefined,
+      accountType: values.role || undefined,
+      aadharNo: values.aadhaar || undefined,
+      panNo: values.pan || undefined,
+      accountNo: values.account || undefined,
+      phoneNo: values.phone || undefined,
+      balance: values.balance || undefined
     };
-    console.log(values);
-    // JSON.parse(JSON.stringify(user));
-    // signup(user).then((data) => {
-    //   if(data.error) {
-    //     setValues({ ...values, error: data.error });
-    //   }
-    //   else {
-    //     setValues({ ...values, error: '', open: true });
-    //   }
-    // });
+    console.log(user);
+    signup(user).then((data) => {
+      if(data.error) {
+        setValues({ ...values, error: data.error });
+      }
+      else {
+        setValues({ ...values, error: '', open: true });
+      }
+    });
   };
 
   return (
@@ -175,7 +180,7 @@ const SignUp = () => {
             </Grid>
             <Grid item xs={12}>
                 <TextField 
-                    varient="outlined"
+                    variant="outlined"
                     required
                     fullWidth
                     id="date"
@@ -188,11 +193,11 @@ const SignUp = () => {
                 />
             </Grid>
             <Grid item xs={12}>
-              <FormControl variant="outlined">
+              <FormControl variant="outlined" fullWidth>
                 <InputLabel htmlFor="outlined-age-native-simple">Role</InputLabel>
                 <Select
                   native
-                  onChange={handleChange}
+                  onChange={handleChange('role')}
                   label="Role"
                   inputProps={{
                     name: 'role',
