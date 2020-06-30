@@ -17,6 +17,9 @@ const auth = {
     if (typeof window !== "undefined")
       sessionStorage.removeItem('jwt');
     cb();
+  },
+  getJWT() {
+    return sessionStorage.getItem('jwt');
   }
 };
 

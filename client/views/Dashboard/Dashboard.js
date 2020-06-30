@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
+import { dashboard } from './../../auth/api-dashboard';
+import auth from './../../auth/auth-helper';
 
 import {
   AmountLent,
@@ -18,6 +20,8 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
+  const userSession = JSON.parse(auth.getJWT());
+  console.log(userSession.user.name);
 
   return (
     <div className={classes.root}>

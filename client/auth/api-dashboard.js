@@ -1,11 +1,11 @@
-const dashboard = async (user) => {
+const dashboard = async (token) => {
     try {
       let response = await fetch('http://localhost:3000/dashboard1', {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'auth-token':user.token   // If we add user token then only it will work as it is a private route.
+          'auth-token': token   // If we add user token then only it will work as it is a private route.
           // no body needed
         },
         credentials: 'include'
@@ -17,5 +17,5 @@ const dashboard = async (user) => {
   };
   
 export {
-      dashboard
+    dashboard
 };

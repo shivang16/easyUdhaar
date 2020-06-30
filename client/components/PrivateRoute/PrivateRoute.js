@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import auth from './../../auth/auth-helper';
+import { dashboard } from './../../auth/api-dashboard';
 
 const PrivateRoute = props => {
   const { layout: Layout, component: Component, ...rest } = props;
@@ -12,14 +13,13 @@ const PrivateRoute = props => {
       render={matchProps => (
         auth.isAuthenticated() ? (
             <Layout>
-                <Component {...matchProps} />
+                <Component {...matchProps } />
             </Layout>
         ) : (
             <Redirect to={{
                 pathname: '/sign-in',
                 state: {from: props.location}
             }}/>
-        // )}
         )
       )}/>
   );

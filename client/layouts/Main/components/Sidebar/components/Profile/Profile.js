@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
+import auth from './../../../../../../auth/auth-helper'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,11 +26,11 @@ const Profile = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const userSession = JSON.parse(auth.getJWT());
 
   const user = {
-    name: 'Dhruv Bodani',
-    avatar: '/images/avatars/avatar_11.png',
-    bio: 'Chief Executive Officer'
+    name: userSession.user.name,
+    avatar: '/images/avatars/avatar_11.png'
   };
 
   return (
@@ -50,7 +51,7 @@ const Profile = props => {
       >
         {user.name}
       </Typography>
-      <Typography variant="body2">{user.bio}</Typography>
+      {/* <Typography variant="body2">{user.bio}</Typography> */}
     </div>
   );
 };
