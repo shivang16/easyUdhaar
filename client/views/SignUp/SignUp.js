@@ -11,7 +11,12 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { create } from '../../auth/api-user';
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import { signup } from '../../auth/api-user';
 
 function Copyright() {
   return (
@@ -65,15 +70,17 @@ const SignUp = () => {
     setValues({ ...values, [name]: event.target.value });
   };
 
-  const clickSubmit = () => {
+  const clickSubmit = (event) => {
+    event.preventDefault();
     const user = {
       firstName: values.firstName || undefined,
       lastName: values.lastName || undefined,
       email: values.email || undefined,
-      password: values.password || undefined,
-      dob: values.dob || undefined
+      password: values.password || undefined
+      // dob: values.dob || undefined
     };
-    create(user).then((data) => {
+    // JSON.parse(JSON.stringify(user));
+    signup(user).then((data) => {
       if(data.error) {
         setValues({ ...values, error: data.error });
       }

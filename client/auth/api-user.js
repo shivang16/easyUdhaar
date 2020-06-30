@@ -1,6 +1,6 @@
-const create = async (user) => {
+const signup = async (user) => {
     try {
-        let response = await fetch('/api/users/', {
+        let response = await fetch('/user/register', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -12,7 +12,7 @@ const create = async (user) => {
     } catch(err) {
       console.log(err);
     }
-  };
+};
   
   const list = async (signal) => {
     try {
@@ -77,7 +77,7 @@ const create = async (user) => {
   };
   
   export {
-    create,
+    signup,
     list,
     read,
     update,

@@ -78,49 +78,50 @@ router.post('/register',async (req,res)=>{
     if(emailExist) return res.status(400).send("Email Already exist");
 
     // Checking if both the passwords match or not
-    if(req.body.password != req.body.password1){
-        return res.status(400).send("Password does not match!!");
-    }
+    // if(req.body.password != req.body.password1){
+    //     return res.status(400).send("Password does not match!!");
+    // }
 
     // Hashing password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password,salt);
     
     // Creating New User And saving in Database
-    const {firstName,lastName,email,password,dob,address} = req.body;
-    email1=email;
+    const {firstName,lastName,email,password,dob} = req.body;
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password,salt);
+    // email1=email;
     rand=Math.floor((Math.random() * 100) + 54);
     console.log("------------------------"+rand);
     host='localhost:3000/user'
     link="http://"+host+"/verify?id="+rand;
     
     mailOptions={
-        to : email1,
+        to : email,
         subject : "Please confirm your Email account",
         html : getEmailTemplate(link) 
     }
 
     console.log(mailOptions);
     
-    smtpTransport.sendMail(mailOptions, function(error, response){
+    smtpTransport.sendMail(mailOptions, async function(error, response){
      if(error){
             console.log(error);
         res.end("error");
      }else{
             console.log("Message sent: " + response.message);
-        res.end("Email sent!!");
+            let user = {};
+            user.firstName = firstName;
+            user.lastName = lastName;
+            user.email = email;
+            user.password =  hashedPassword;
+            // user.dob = dob;
+            let userModel = new User(user);
+            await userModel.save();
+            console.log("Data Added to User Database!!");
+            return res.json({
+                message: "Email sent!!"
+            });
         }
     });
-    
-    let user = {};
-    user.firstName = firstName;
-    user.lastName = lastName;
-    user.email = email;
-    user.password =  hashedPassword;
-    user.dob = dob;
-    let userModel = new User(user);
-    await userModel.save();
-    console.log("Data Added to User Database!!");
    
 });
 
