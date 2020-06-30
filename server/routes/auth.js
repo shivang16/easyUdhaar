@@ -100,7 +100,7 @@ router.post('/register',async (req,res)=>{
         html : getEmailTemplate(link) 
     }
 
-    console.log(mailOptions);
+    //console.log(mailOptions);
     
     smtpTransport.sendMail(mailOptions, async function(error, response){
      if(error){
@@ -222,7 +222,7 @@ router.post('/editProfile',verify,async (req,res)=>{
         user.address = address
     }
     await user.save();
-    res.send(user);
+    res.send("Profile updated");
       
 });
 

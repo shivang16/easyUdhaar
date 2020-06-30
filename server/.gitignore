@@ -1,2 +1,5 @@
 node_modules
-
+cert.pem
+DigiCertGlobalRootCA
+DigiCertGlobalRootCA.pem
+key_d9f40447-57e1-4b60-b233-685d163abdc5.pem
