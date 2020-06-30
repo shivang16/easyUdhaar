@@ -6,10 +6,8 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import {
   Card,
-  CardActions,
   CardHeader,
   CardContent,
-  Button,
   Divider,
   Table,
   TableBody,
@@ -19,8 +17,6 @@ import {
   Tooltip,
   TableSortLabel
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-// import {theme} from '.';
 
 import mockData from './data';
 import { StatusBullet } from '../../../../components';
@@ -124,14 +120,6 @@ const LendingHistory = props => {
         </PerfectScrollbar>
       </CardContent>
       <Divider />
-      <CardActions className={classes.actions}>
-        <Button
-          size="small"
-          variant="text"
-        >
-          View all <ArrowRightIcon />
-        </Button>
-      </CardActions>
     </Card>
   );
 };

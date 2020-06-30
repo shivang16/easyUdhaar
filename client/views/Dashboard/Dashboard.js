@@ -6,10 +6,11 @@ import auth from './../../auth/auth-helper';
 
 import {
   AmountLent,
-  TotalUsers,
   TasksProgress,
   LendingHistory,
-  TotalRewards
+  TotalRewards,
+  ActiveCampaigns,
+  TotalCampaigns
 } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -20,8 +21,8 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  const userSession = JSON.parse(auth.getJWT());
-  console.log(userSession.user.name);
+  // const userSession = JSON.parse(auth.getJWT());
+  // console.log(userSession.user.name);
 
   return (
     <div className={classes.root}>
@@ -45,7 +46,7 @@ const Dashboard = () => {
           xl={3}
           xs={12}
         >
-          <TotalUsers />
+          <TotalCampaigns />
         </Grid>
         <Grid
           item
@@ -64,6 +65,15 @@ const Dashboard = () => {
           xs={12}
         >
           <TotalRewards />
+        </Grid>
+        <Grid
+          item
+          lg={12}
+          md={12}
+          xl={9}
+          xs={12}
+        >
+          <ActiveCampaigns />
         </Grid>
         <Grid
           item
