@@ -85,7 +85,7 @@ router.post('/register',async (req,res)=>{
     // Hashing password
     
     // Creating New User And saving in Database
-    const {firstName,lastName,email,password,dob} = req.body;
+    const {firstName,lastName,email,password,dob,accountNo,cardExpiry,balance,accountType} = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
     // email1=email;
@@ -113,6 +113,10 @@ router.post('/register',async (req,res)=>{
             user.lastName = lastName;
             user.email = email;
             user.password =  hashedPassword;
+            user.accountNo = accountNo;
+            user.cardExpiry = cardExpiry;
+            user.balance = balance;
+            user.accountType = accountType;
             // user.dob = dob;
             let userModel = new User(user);
             await userModel.save();

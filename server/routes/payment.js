@@ -14,8 +14,8 @@ router.post('/',verify,async (req,res)=>{
     const sender = await User.findOne({_id:senderId});
     const reciver = await User.findOne({_id:reciverId});
 
-    // console.log(sender);
-    // console.log(reciver);
+    console.log(sender);
+    console.log(reciver);
 
     if(sender.balance < amountTransfered){
         return res.status(500).send("Not enough amount to make this payment!");
@@ -23,7 +23,6 @@ router.post('/',verify,async (req,res)=>{
 
     function getParameters_pull() {
         var parameters = {
-            "x-client-transaction-id": "2i3hb4cw4cnj",
             "Accept": "application/json",
             "Content-Type": "application/json"
         };
@@ -47,7 +46,7 @@ router.post('/',verify,async (req,res)=>{
             "acquiringBin": "408999",
             "systemsTraceAuditNumber": "451001",
             "senderCurrencyCode": "USD",
-            "senderPrimaryAccountNumber": sender.accountNo,
+            "senderPrimaryAccountNumber": "4957030420210496",
             
         };
         parameters.payload.localTransactionDateTime = Date.now();
@@ -65,13 +64,12 @@ router.post('/',verify,async (req,res)=>{
 
         function getParameters_push() {
             var parameters = {
-                "x-client-transaction-id": "f54evcwwqrqc1423xf54cw4rc",
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             };
             parameters.payload = {
                 "businessApplicationId": "AA",
-                "transactionIdentifier": result_pull.response.body.transactionIdentifier,
+                "transactionIdentifier": "381228649430015",
                 "cardAcceptor": {
                     "idCode": "CA-IDCode-77765",
                     "address": {
@@ -84,9 +82,9 @@ router.post('/',verify,async (req,res)=>{
                     "name": "Visa Inc. USA-Foster City"
                 },
                 "acquirerCountryCode": "840",
-                "recipientPrimaryAccountNumber": reciver.accountNo,
+                "recipientPrimaryAccountNumber": "4957030420210496",
                 "retrievalReferenceNumber": "412770451018",
-                "senderAccountNumber": sender.accountNo,
+                "senderAccountNumber": "4653459515756154",
                 "transactionCurrencyCode": "USD",
                 "acquiringBin": "408999",
                 "amount": amountTransfered,
@@ -115,9 +113,8 @@ router.post('/',verify,async (req,res)=>{
             console.log('\n Response Status: ' + JSON.stringify(error_push.response.statusCode));
 
 
-            function getParameters() {
+            function getParameters_reverse() {
                 var parameters = {
-                    "x-client-transaction-id": "jnrgnf2453",
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 };

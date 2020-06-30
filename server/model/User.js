@@ -30,7 +30,7 @@ const userScheme = new mongoose.Schema({
     dob:{
         type:Date,
         required:true,
-        default:Date.now
+        default:Date.now()
     },
     phoneNo:{
         type: String,
@@ -69,7 +69,8 @@ const userScheme = new mongoose.Schema({
     accountNo:{
         type:String,
         min:16,
-        max:16
+        max:16,
+        required:true
     },
     balance:{
         type:Number,
@@ -104,6 +105,10 @@ const userScheme = new mongoose.Schema({
         default:false
     },
     defaulter:{
+        type:Boolean,
+        default:false
+    },
+    accountType:{
         type:Boolean,
         default:false
     }

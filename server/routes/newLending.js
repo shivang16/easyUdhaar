@@ -12,11 +12,12 @@ const Transaction = require('../model/Transaction')
 router.post('/',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
+    if(currentUser.accountType==true)  return res.send("You are a borrower you can't lend");
 
     // Checking if account is verified or not
-    if(currentUser.profileVerified == false){
-        return res.send("Profile is not verified!");
-    }
+    // if(currentUser.profileVerified == false){
+    //     return res.send("Profile is not verified!");
+    // }
   
     //console.log(currentUser);
     
@@ -24,7 +25,7 @@ router.post('/',verify,async (req,res)=>{
     const {campaignId,amountGiven} = req.body;  
    
     const currectCampaign = await Campaign.findOne({_id:campaignId});
-    //console.log(currectCampaign);
+    console.log(currectCampaign);
 
     if(amountGiven > currectCampaign.amountExpected) return res.send("You cannot lend more amount than expected");
 

@@ -39,7 +39,7 @@ funds_transfer_api.pullfunds(getParameters())
 
     function getParameters() {
         var parameters = {
-            "x-client-transaction-id": "2i3hb4cw4cnj",
+            // "x-client-transaction-id": "2i3hb4cw4cnj",
             "Accept": "application/json",
             "Content-Type": "application/json"
         };

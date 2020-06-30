@@ -12,6 +12,8 @@ router.post('/',verify,async (req,res)=>{
     
     // Account verification completed?? 
     const currentUser = await User.findOne({_id:req.user._id});
+
+    if(currentUser.accountType==false)  return res.send("You are a lender you can't repay");
   
     // Creating New User And saving in Database
     const {lendingId,amountGiven} = req.body;  

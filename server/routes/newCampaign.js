@@ -11,11 +11,13 @@ const BusinessQuestion = require('../model/BusinessQuestion');
 router.post('/business',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
+
+    if(currentUser.accountType==false)  return res.send("You are a lender you can't borrow");
     
     // Checking if account is verified or not
-    if(currentUser.profileVerified == false){
-        return res.send("Profile is not verified!");
-    }
+    // if(currentUser.profileVerified == false){
+    //     return res.send("Profile is not verified!");
+    // }
 
     if(currentUser.defaulter == true) return res.send("You are a defaulter!");
 

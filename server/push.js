@@ -18,7 +18,7 @@ funds_transfer_api.pushfunds(getParameters())
 
 function getParameters() {
     var parameters = {
-        "x-client-transaction-id": "f54evcwwqrqc1423xf54cw4rc",
+        // "x-client-transaction-id": "134eqwdc1e13",
         "Accept": "application/json",
         "Content-Type": "application/json"
     };

@@ -11,10 +11,11 @@ const { date } = require('@hapi/joi');
 router.get('/',verify,async (req,res)=>{
     const user = await User.findOne({_id:req.user._id});
 
-    var finalResponse = {};
-    // Total amount lent
-    var totalAmountLend = 0;
-    var totalAmountRecived = 0;
+    if(user.accountType == false)
+    {
+        var totalAmountLend = 0;
+        var totalAmountRecived = 0;
+        
     await Lender.find({lenderId:user._id},function (err,data) {
         if(err) return res.send(err);
         
@@ -27,12 +28,14 @@ router.get('/',verify,async (req,res)=>{
             "totalAmountLend":totalAmountLend,
             "totalAmountRecived":totalAmountRecived
         };
-        finalResponse['lending'] = returnObject;
+        return res.send(returnObject);
+        //finalResponse['lending'] = returnObject;
     });
 
-
-
-    var totalAmountExpected = 0;
+    }
+    else
+    {
+        var totalAmountExpected = 0;
     var totalAmountGet = 0;
     var campaignProgress = 0;
     var repaymentProgress = 0;
@@ -56,11 +59,20 @@ router.get('/',verify,async (req,res)=>{
             "repaymentProgress":repaymentProgress
 
         }
-        finalResponse['campaign'] = returnObject;
+        return res.send(returnObject);
+        //finalResponse['campaign'] = returnObject;
     });
     
+    }
+
+    //var finalResponse = {};
+    // Total amount lent
     
-    res.send(finalResponse);
+
+
+    
+    
+   // res.send(finalResponse);
 
 
 
