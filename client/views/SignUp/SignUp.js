@@ -193,7 +193,7 @@ const SignUp = () => {
                 />
             </Grid>
             <Grid item xs={12}>
-              <FormControl variant="outlined" fullWidth>
+              <FormControl variant="outlined" fullWidth required>
                 <InputLabel htmlFor="outlined-age-native-simple">Role</InputLabel>
                 <Select
                   native
@@ -225,7 +225,7 @@ const SignUp = () => {
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
-                required
+                required123456789012
                 fullWidth
                 id="pan"
                 label="Pan Card Number"
@@ -298,11 +298,11 @@ const SignUp = () => {
           <DialogTitle>New Account</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              New account successfully created.
+              Email has been sent for verification. Please check your Inbox.
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Link to="/signin">
+            <Link to="/sign-in">
               <Button color="primary" autoFocus="autoFocus" variant="contained">
                 Sign In
               </Button>
