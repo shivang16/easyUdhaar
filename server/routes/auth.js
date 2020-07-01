@@ -49,19 +49,19 @@ if((req.protocol+"://"+req.get('host')+'/user')==("http://"+host))
             }
         });
 
-        res.end("<h1>Email "+mailOptions.to+" is been Successfully verified</h1>");
+        res.end("Email "+mailOptions.to+" is been Successfully verified");
     }
     else
     {
         console.log("email is not verified");
         await user.remove();
-        res.end("<h1>Bad Request</h1>");
+        res.end("Bad Request");
     }
 }
 else
 {
     await user.remove();
-    res.end("<h1>Request is from unknown source</h1>");
+    res.end("Request is from unknown source");
 }
 });
 

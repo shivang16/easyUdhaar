@@ -98,7 +98,7 @@ const SignUp = () => {
         setValues({ ...values, error: data.error });
       }
       else {
-        if(data!="Email sent!!")
+        if(data.message!="Email sent!!")
         {
           alert(data);
           return (<Redirect to="/sign-up"/>);
