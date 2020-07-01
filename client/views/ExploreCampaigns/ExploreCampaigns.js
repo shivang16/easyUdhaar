@@ -59,7 +59,7 @@ const ExploreCampaigns = () => {
   useEffect(() => {
     explore(token).then((data) => {
       if (data && data.error) {
-        console.log(data.error);
+          myprops = data[0];
       } else {
         setMyprops(data);
       }
@@ -68,26 +68,33 @@ const ExploreCampaigns = () => {
 
   return (
     <div className={classes.root}>
-    <div style={{padding:"20px"}}>
-    <Typography
-    variant="h1"
-    >
-      Explore Active Campaigns
-    </Typography>
-    
-    </div>
+      <div style={{ padding: '20px' }}>
+        <Typography variant="h1">Explore Active Campaigns</Typography>
+      </div>
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            
-          </ListSubheader>
+          <ListSubheader
+            component="div"
+            id="nested-list-subheader"></ListSubheader>
         }
-        className={classes.root}
-      >
+        className={classes.root}>
         <div className={classes.horiz}>
-          <ExploreCard />
+          {myprops.map(currDetail => (
+            <div>
+              {
+                <ExploreCard
+                  borrowerName= "bad"//{currDetail.borrowerName}
+                  amountInital={currDetail.amountInital}
+                  amountReq={currDetail.amountReq}
+                  campaignId={currDetail.campaignId}
+                  campaignProgress={currDetail.campaignProgress}
+                  campaignType={currDetail.campaignType}
+                  creditScore={currDetail.creditScore}></ExploreCard>
+              }
+            </div>
+          ))}
         </div>
       </List>
     </div>
