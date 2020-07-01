@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import auth from './../../../../auth/auth-helper';
 // import { colors } from '@material-ui/core';
 import {
   Card,
@@ -30,13 +31,12 @@ const AccountDetails = props => {
 
   const classes = useStyles();
 
+  const userSession = JSON.parse(auth.getJWT());
+
   const [values, setValues] = useState({
-    firstName: 'Shen',
-    lastName: 'Zhi',
-    email: 'shen.zhi@devias.io',
-    phone: '',
-    state: 'Alabama',
-    country: 'USA'
+    firstName: userSession.user.firstName,
+    lastName: userSession.user.lastName,
+    email: userSession.user.email
   });
 
   const handleChange = event => {
@@ -46,20 +46,20 @@ const AccountDetails = props => {
     });
   };
 
-  const states = [
-    {
-      value: 'alabama',
-      label: 'Alabama'
-    },
-    {
-      value: 'new-york',
-      label: 'New York'
-    },
-    {
-      value: 'san-francisco',
-      label: 'San Francisco'
-    }
-  ];
+  // const states = [
+  //   {
+  //     value: 'alabama',
+  //     label: 'Alabama'
+  //   },
+  //   {
+  //     value: 'new-york',
+  //     label: 'New York'
+  //   },
+  //   {
+  //     value: 'san-francisco',
+  //     label: 'San Francisco'
+  //   }
+  // ];
 
   return (
     <Card
@@ -142,12 +142,12 @@ const AccountDetails = props => {
                 margin="dense"
                 name="phone"
                 onChange={handleChange}
-                type="number"
+                // type="number"
                 value={values.phone}
                 variant="outlined"
               />
             </Grid>
-            <Grid
+            {/* <Grid
               item
               md={6}
               xs={12}
@@ -190,7 +190,7 @@ const AccountDetails = props => {
                 value={values.country}
                 variant="outlined"
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </CardContent>
         <Divider />

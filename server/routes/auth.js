@@ -169,7 +169,9 @@ router.post('/login',async (req,res)=>{
           _id: selected_user._id,
           name: selected_user.firstName + " " + selected_user.lastName,
           email: selected_user.email,
-          role: selected_user.accountType
+          role: selected_user.accountType,
+          firstName: selected_user.firstName,
+          lastName: selected_user.lastName
         }
       })
     

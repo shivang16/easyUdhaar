@@ -52,7 +52,8 @@ const AccountProfile = props => {
     city: 'Mumbai',
     country: 'India',
     timezone: 'IST',
-    avatar: '/images/avatars/avatar_11.png'
+    avatar: '/images/avatars/avatar_11.png',
+    role: userSession.user.role ? 'Borrower' : 'Lender'
   };
 
   return (
@@ -74,7 +75,7 @@ const AccountProfile = props => {
               color="textSecondary"
               variant="body1"
             >
-              {user.city}, {user.country}
+              {user.role}
             </Typography>
             <Typography
               className={classes.dateText}
