@@ -35,6 +35,9 @@ const Topbar = ({ history }, props) => {
 
   const classes = useStyles();
 
+  const userSession = JSON.parse(auth.getJWT());
+  const role = userSession.user.role;
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -44,6 +47,7 @@ const Topbar = ({ history }, props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
 
   return (
     <AppBar
@@ -60,23 +64,31 @@ const Topbar = ({ history }, props) => {
         </Typography>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
-          <Button className={classes.borrowButton} variant="outlined" onClick={handleClick}>
-            Create Campaign
-          </Button>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
-          >
-            <Link to="/business-loan">
-              <MenuItem onClick={handleClose}>Business Loan</MenuItem>
-            </Link>
-            <Link to="/personal-loan">
-              <MenuItem onClick={handleClose}>Personal Loan</MenuItem>
-            </Link>
-          </Menu>
+          {
+            role && (
+              <Button className={classes.borrowButton} variant="outlined" onClick={handleClick}>
+                Create Campaign
+              </Button>
+            )
+          }
+          {
+            role && (
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <Link to="/business-loan">
+                  <MenuItem onClick={handleClose}>Business Loan</MenuItem>
+                </Link>
+                <Link to="/personal-loan">
+                  <MenuItem onClick={handleClose}>Personal Loan</MenuItem>
+                </Link>
+              </Menu>
+            )
+          }
           <Button color="inherit">About Us</Button>
           <IconButton
             className={classes.signOutButton}
