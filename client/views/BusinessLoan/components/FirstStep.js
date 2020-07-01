@@ -116,7 +116,7 @@ const FirstStep = ({
           placeholder="lol"
           margin="normal">
           <InputLabel htmlFor="gender">Gender</InputLabel>
-          <Select value={gender} onChange={handleChange('gender')}>
+          <Select label="Gender" value={gender} onChange={handleChange('gender')}>
             <MenuItem value={'Male'}>Male</MenuItem>
             <MenuItem value={'Female'}>Female</MenuItem>
           </Select>

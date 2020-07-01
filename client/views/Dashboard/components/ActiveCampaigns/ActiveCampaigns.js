@@ -64,7 +64,8 @@ const ActiveCampaigns = props => {
       className={clsx(classes.root, className)}>
       <CardHeader
         classes="#fff"
-        title="Active Campaigns"
+        title="Current Active Campaign"
+        subtitle = "Personal"
       />
       <Divider />
       <CardContent className={classes.content}>
@@ -73,7 +74,7 @@ const ActiveCampaigns = props => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>Campaign Name</TableCell>
+                  <TableCell>Lender ID</TableCell>
                     <TableCell>Required Amount</TableCell>
                   <TableCell sortDirection="desc">
                     <Tooltip

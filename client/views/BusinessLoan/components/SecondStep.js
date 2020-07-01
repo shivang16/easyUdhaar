@@ -268,7 +268,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                     <Select
                       native
                       onChange={handleChange('Supply_of_goods')}
-                      label="Do most of your transactions happen in cash?"
+                      label="Do you require supply of goods?"
                       inputProps={{
                         name: 'Supply_of_goods',
                         id: 'outlined-age-native-simple',
@@ -294,7 +294,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                       defaultValue={Value_of_assets}
                       onChange={handleChange('Value_of_assets')}
                       margin="normal"
-                      required
+                      required 
                     />
                   </div>
                 </Row>
