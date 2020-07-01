@@ -76,9 +76,6 @@ const Topbar = ({ history }, props) => {
             <Link to="/personal-loan">
               <MenuItem onClick={handleClose}>Personal Loan</MenuItem>
             </Link>
-            <Link to="/personal-loan">
-            <MenuItem onClick={handleClose}>Medical Loan</MenuItem>
-            </Link>
           </Menu>
           <Button color="inherit">About Us</Button>
           <IconButton

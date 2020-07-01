@@ -5,6 +5,11 @@ import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/styles';
 import { Typography, Box } from '@material-ui/core';
 import {Row, Col} from 'react-bootstrap';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl'
+
+
 const useStyles = makeStyles(theme => ({
   root: {},
   content: {
@@ -64,7 +69,8 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
         Years_running, 
         Customer_facing, 
         Place_of_operation_owned, 
-        Cash_transactions, 
+        Cash_transactions,
+        Supply_of_goods, 
         Value_of_assets 
     } 
 }) => {
@@ -194,47 +200,86 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.inner}>
-                  <TextField
-                    className={classes.form}
-                    label="Is your business customer facing?"
-                    variant="outlined"
-                    name="Customer_facing"
-                    placeholder="Enter Customer Facing"
-                    defaultValue={Customer_facing}
-                    onChange={handleChange('Customer_facing')}
-                    margin="normal"
-                    required
-                  />
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel htmlFor="outlined-age-native-simple">Is your business customer facing?</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Customer_facing')}
+                      label="Is your business customer facing?"
+                      inputProps={{
+                        name: 'Customer_facing',
+                        id: 'outlined-age-native-simple',
+                      }}
+                      value={Customer_facing}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value={1}>Yes</option>
+                      <option value={0}>No</option>
+                    </Select>
+                  </FormControl>
                 </div>
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.inner}>
-                  <TextField
-                    className={classes.form}
-                    label="Ownership of place of operation"
-                    variant="outlined"
-                    name="Place_of_operation_owned"
-                    placeholder="Enter Places of Operation Owned"
-                    defaultValue={Place_of_operation_owned}
-                    onChange={handleChange('Place_of_operation_owned')}
-                    margin="normal"
-                    required
-                  />
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel htmlFor="outlined-age-native-simple">Is Place of operation owned?</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Place_of_operation_owned')}
+                      label="Place_of_operation_owned"
+                      inputProps={{
+                        name: 'Place_of_operation_owned',
+                        id: 'outlined-age-native-simple',
+                      }}
+                      value={Place_of_operation_owned}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value={true}>Yes</option>
+                      <option value={false}>No</option>
+                    </Select>
+                  </FormControl>
                 </div>
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.inner}>
-                  <TextField
-                    className={classes.form}
-                    variant="outlined"
-                    label="Do most of your transactions happen in cash?"
-                    name="Cash_transactions"
-                    placeholder=""
-                    defaultValue={Cash_transactions}
-                    onChange={handleChange('Cash_transactions')}
-                    margin="normal"
-                    required
-                  />
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel htmlFor="outlined-age-native-simple">Do most of your transactions happen in cash?</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Cash_transactions')}
+                      label="Do most of your transactions happen in cash?"
+                      inputProps={{
+                        name: 'Cash_transactions',
+                        id: 'outlined-age-native-simple',
+                      }}
+                      value={Cash_transactions}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value={true}>Yes</option>
+                      <option value={false}>No</option>
+                    </Select>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <div className={classes.inner}>
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel htmlFor="outlined-age-native-simple">Do you require supply of goods?</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Supply_of_goods')}
+                      label="Do most of your transactions happen in cash?"
+                      inputProps={{
+                        name: 'Supply_of_goods',
+                        id: 'outlined-age-native-simple',
+                      }}
+                      value={Supply_of_goods}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value={true}>Yes</option>
+                      <option value={false}>No</option>
+                    </Select>
+                  </FormControl>
                 </div>
               </Grid>
               <Grid item xs={12}>

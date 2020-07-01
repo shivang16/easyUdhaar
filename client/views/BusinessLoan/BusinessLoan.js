@@ -29,7 +29,8 @@ const BusinessLoan = () => {
         Years_running: '',
         Customer_facing: '',
         Place_of_operation_owned: '',
-        Cash_transactions: '',
+		Cash_transactions: '',
+		Supply_of_goods: '',
         Value_of_assets: '',
 	}); 
 	

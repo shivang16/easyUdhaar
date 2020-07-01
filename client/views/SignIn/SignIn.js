@@ -143,10 +143,6 @@ const SignIn = (props) => {
             onChange={handleChange('password')}
             value={values.password}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -164,11 +160,6 @@ const SignIn = (props) => {
             </Typography>)
           }
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
               <Link href="/sign-up" variant="body2">
                 {"Don't have an account? Sign Up"}
