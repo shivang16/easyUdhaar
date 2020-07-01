@@ -70,13 +70,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const ExploreCampaigns = () => {
+const ExploreCampaigns = (match) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  // useEffect(() => {
+  // const abortController = new AbortController();
+  // const signal = abortController.signal;
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  // read(
+  //   {
+  //     userId: match.params.userId
+  //   },
+  //   { t: jwt.token },
+  //   signal
+  // ).then(data => {
+  //   if (data && data.error) {
+  //     setRedirectToSignin(true);
+  //   } else {
+  //     setUser(data);
+  //   }
+  // });
+
+  // return function cleanup() {
+  //   abortController.abort();
+  // };
+// }, [match.params.userId]);
+//   const handleExpandClick = () => {
+//     setExpanded(!expanded);
+//   };
 
 
   return (
