@@ -7,23 +7,34 @@ const rp = require('request-promise');
 const PersonalQuestion = require('../model/PersonalQuestions');
 const BusinessQuestion = require('../model/BusinessQuestion');
 
+function typeCastToBool(data){
+    if(typeof(data=='string'))
+    {
+        if(data=='true')
+            return true;
+        else
+            return false;
+    }
+    return data;
+}
+
 
 router.post('/business',verify,async (req,res)=>{
     console.log("Arre bhai bhai bhai");
     const currentUser = await User.findOne({_id:req.user._id});
 
     if(currentUser.accountType==false)  return res.send("You are a lender you can't borrow");
-    console.log(currentUser);
+    //console.log(currentUser);
     // Checking if account is verified or not
     // if(currentUser.profileVerified == false){
     //     return res.send("Profile is not verified!");
     // }
 
     if(currentUser.defaulter == true) return res.send("You are a defaulter!");
-    console.log(req.body);
+    //console.log(req.body);
 
     // Fetching data from body
-    const {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
+    var {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
     job,placeOwned,yearsRunning,cashMajority,goods,assetValue,age,duration,checkingAccount} = req.body;   // Here we don't need to add borrowerId it can be taken form token
     
     
@@ -32,14 +43,14 @@ router.post('/business',verify,async (req,res)=>{
     if(validate_check) return res.status(400).send(validate_check);
 
     
-    console.log("yaha bhi aa gye hum");
+    //console.log("yaha bhi aa gye hum");
 
-    // Check if same type of loan is already taken by user
-    // const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
-    // if(loanTaken != null){
-    //     return res.send("Loan Already taken");
-    // }
-    // else{
+    //Check if same type of loan is already taken by user
+    const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
+    if(loanTaken != null){
+        return res.send("Loan Already taken");
+    }
+    else{
         let campaign = {};
         campaign.borrowerId = currentUser._id;
         campaign.loanType = 1;
@@ -48,7 +59,11 @@ router.post('/business',verify,async (req,res)=>{
         campaign.amount = amountExpected;
         campaign.duration = duration;
 
-        // Loan Questions and credit Score API
+        cashMajority = typeCastToBool(cashMajority);
+        placeOwned = typeCastToBool(placeOwned);
+        goods = typeCastToBool(goods);
+
+        // Loan Questions and credit Score AP
         const Questions = {
         "businessIncome":businessIncome,
         "employes" : employes,
@@ -64,7 +79,7 @@ router.post('/business',verify,async (req,res)=>{
         "checkingAccount":checkingAccount,
         "goods":goods
         }
-
+        //console.log(Questions);
         const validate_check2 = validator.businessQuestionValidation(Questions);
         if(validate_check2) return res.status(400).send(validate_check2);
         console.log("endgame");
@@ -91,7 +106,7 @@ router.post('/business',verify,async (req,res)=>{
             body: parameters,
             json: true // Automatically stringifies the body to JSON
         };
-        
+        console.log(options);
         let response = await rp(options)
             .then(async function (parsedBody) {
                 
@@ -111,26 +126,28 @@ router.post('/business',verify,async (req,res)=>{
                     await businessQuestionModel.save();
                     console.log("Data Added to Business Model database!!");
 
-                    currentUser.businessLoan = true;
+                    //currentUser.businessLoan = true;
                     currentUser.creditScoreBusiness = apiScore;
                     currentUser.previousLoan = Date.now();
                     await currentUser.save();
-                    console.log(campaignModel);
-                    res.send(campaignModel);
+                    //console.log(campaignModel);
+                    console.log("Hii");
+                    res.json({"status":"LA"});
         
                 }
                 else{
+                    console.log("Bye");
                     console.log(apiScore);
-                    res.send("Loan Not Approved");
+                    res.json({"status":"LNA"});
                 }
            })
            .catch(function (err) {
-               console.log("I am an error");
+               //console.log("I am an error");
                 return res.send("Error: "+ err);
                 console.log(err);
                 // POST failed...
             });
-    // }
+    }
 });
 
 router.post('/personal',verify,async (req,res)=>{
