@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { List, ListItem, Button, colors } from '@material-ui/core';
+import auth from './../../../../../../auth/auth-helper'
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -56,12 +57,15 @@ const SidebarNav = props => {
 
   const classes = useStyles();
 
+  const userSession = JSON.parse(auth.getJWT());
+  const role = userSession.user.role;
+  // console.log("role ye hai: " + role);
   return (
     <List
       {...rest}
       className={clsx(classes.root, className, classes.sidebar)}
     >
-      {pages.map(page => (
+      {pages.filter(page => ( !(page.title === 'Explore Campaigns' && role) )).map(page => (
         <ListItem
           className={classes.item}
           disableGutters
