@@ -1,6 +1,6 @@
 const dashboard = async (token) => {
     try {
-      let response = await fetch('http://localhost:3000/dashboard1', {
+      let response = await fetch('http://localhost:3000/dashboard1',  {
         method: 'GET',
         headers: {
           'Accept': 'application/json',

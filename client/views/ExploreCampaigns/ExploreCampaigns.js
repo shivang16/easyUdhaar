@@ -5,6 +5,8 @@ import List from '@material-ui/core/List';
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import { ExploreCard } from './components';
+import { explore } from './../../auth/api-explore';
+import auth from './../../auth/auth-helper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,25 +51,26 @@ const ExploreCampaigns = () => {
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
 
+  const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
+
   // useEffect(() => {
   //   const abortController = new AbortController()
   //   const signal = abortController.signal
 
-  //   read({
-  //     userId: match.params.userId
-  //   }, {t: jwt.token}, signal).then((data) => {
+  //   explore(token, signal).then((data) => {
   //     if (data && data.error) {
-  //       setRedirectToSignin(true)
+  //       // setRedirectToSignin(true)
+  //       console.log(data.error);
   //     } else {
-  //       setUser(data)
+  //       // setUser(data)
   //     }
   //   })
 
   //   return function cleanup(){
   //     abortController.abort()
   //   }
-
-  // }, [match.params.userId])
+  // }, [])
 
   return (
     <div className={classes.root}>
