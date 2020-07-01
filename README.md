@@ -113,7 +113,7 @@ easyUdhaar is a **microlending** startup that **uses financial and non-financial
 1. Lender 
 2. Borrower
 
-**All transactions are implemented via Visa Direct API.**
+**All transactions are implemented via Visa Direct API(VISA pull and push funds transfer).**
 
 
 ## Lender
