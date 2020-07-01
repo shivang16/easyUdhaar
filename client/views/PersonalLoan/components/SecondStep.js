@@ -103,7 +103,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                     <Select
                       native
                       onChange={handleChange('Housing')}
-                      label="Housing"
+                      label="Housing Type"
                       value={Housing}
                     >
                       <option aria-label="None" value="" />
