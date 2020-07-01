@@ -96,12 +96,57 @@ router.get('/',verify,async (req,res)=>{
             "campaignProgress":campaignProgress
         }
         returnObject["activeCampaign"] = activeCampaign;
-        return res.json(returnObject);
+        return res.json({returnObject});
         //finalResponse['campaign'] = returnObject  ;
     });
     
     }
 
 });
+
+
+
+router.get('/exploreCampaigns',verify,async (req,res)=>{
+    const currentUser = await User.findOne({_id:req.user._id});
+    console.log(currentUser);
+    //if(currentUser.accountType==true)  return res.send("You are a borr");
+
+    await Campaign.find({running:true},async (err,data)=>{
+        if(err) return res.send("error: " + err);
+        else
+        {
+            var finalObject = {};
+        for(var i=0;i<data.length;i++)
+        {
+            console.log(data[i]);
+            const borrower = await User.findOne({_id:data[i].borrowerId})
+            if(borrower==null) continue;
+            const borrowerName = borrower.firstName + " " + borrower.lastName;
+            var cs;
+            if(data[i].loanType==1)
+            {
+                cs = borrower.creditScoreBusiness;
+            }
+            else
+            {
+                cs = borrower.creditScorePersonal;
+            }
+            const progress = data[i].amountExpected/data[i].amount;
+            const temp = {
+                "borrowerName":borrowerName,
+                "creditScore":cs,
+                "campaignType":data[i].loanType,
+                "campaignProgress":progress,
+                "amountInital":data[i].amount,
+                "amountReq":data[i].amountExpected
+            };
+            finalObject.push(temp);
+
+        }
+        return res.json({data:finalObject});
+        }
+        
+    });
+})
 
 module.exports = router;
