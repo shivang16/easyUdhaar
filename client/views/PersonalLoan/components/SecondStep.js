@@ -108,8 +108,8 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                     >
                       <option aria-label="None" value="" />
                       <option value="rent">Rent</option>
-                      <option value="owned">Owned</option>
-                      <option value="homeless">Homeless</option>
+                      <option value="own">Owned</option>
+                      <option value="free">Homeless</option>
                     </Select>
                   </FormControl>
                 </div>
