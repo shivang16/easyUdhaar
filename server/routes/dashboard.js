@@ -97,7 +97,7 @@ router.get('/',verify,async (req,res)=>{
         }
         returnObject["activeCampaign"] = activeCampaign;
         return res.json(returnObject);
-        //finalResponse['campaign'] = returnObject;
+        //finalResponse['campaign'] = returnObject  ;
     });
     
     }
