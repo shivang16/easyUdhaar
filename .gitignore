@@ -1,6 +1,6 @@
 /node_modules/
 /dist/
 /data/
-/server/creds/
+/server/cred/
 npm-debug.log
 .env
