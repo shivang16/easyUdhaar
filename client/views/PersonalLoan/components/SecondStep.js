@@ -57,23 +57,24 @@ const useStyles = makeStyles(theme => ({
 const SecondStep = ({ handleNext, handleBack, handleChange,
     values: 
     { 
-        job,
-		Housing,
-		Saving_accounts,
-        Checking_account,
-        Credit_amount,
-        Duration,
-        Purpose,
-        Family_members,
-        Literate_fam,
-        Earning_member,
-        Eat_out,
-        Nearest_major_city,
-        Times_travelled_more_than_100km_in_last_60days,
-		Annual_income,
-		Monthly_cell_bill,
-		Internet_devices,
-		Vehicles
+      job,
+      Housing,
+      Employment_status,
+      Saving_accounts,
+      Checking_account,
+      Credit_amount,
+      Duration,
+      Purpose,
+      Family_members,
+      Literate_fam,
+      Earning_member,
+      Eat_out,
+      Nearest_major_city,
+      Times_travelled_more_than_100km_in_last_60days,
+      Annual_income,
+      Monthly_cell_bill,
+      Internet_devices,
+      Vehicles
     } 
 }) => {
 		const classes = useStyles();
@@ -84,10 +85,10 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                 <div className={classes.inner}>
                   <TextField
                     className={classes.form}
-                    label="Job"
+                    label="Number of Jobs you are currently working"
                     variant="outlined"
                     name="job"
-                    placeholder="Number of Jobs you are currently working"
+                    placeholder="Job"
                     defaultValue={job}
                     onChange={handleChange('job')}
                     margin="normal"
@@ -97,17 +98,38 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
               </Grid>
               <Grid item xs={12}>
                 <div className={classes.inner}>
-                  <TextField
-                    variant="outlined"
-                    className={classes.form}
-                    label="Housing"
-                    name="housing"
-                    placeholder="Enter your Housing"
-                    defaultValue={Housing}
-                    onChange={handleChange('Housing')}
-                    margin="normal"
-                    required
-                  />{' '}
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel>Housing Type</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Housing')}
+                      label="Housing"
+                      value={Housing}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value="rent">Rent</option>
+                      <option value="owned">Owned</option>
+                      <option value="homeless">Homeless</option>
+                    </Select>
+                  </FormControl>
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <div className={classes.inner}>
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel>Employment Status</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Employment_status')}
+                      label="Employment_status"
+                      value={Employment_status}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value="Employed">Employed</option>
+                      <option value="Run a business">Run a business</option>
+                      <option value="Unemployed">Unemployed</option>
+                    </Select>
+                  </FormControl>
                 </div>
               </Grid>
               <Grid item xs={12}>

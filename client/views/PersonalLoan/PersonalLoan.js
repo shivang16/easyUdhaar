@@ -20,6 +20,7 @@ const PersonalLoan = () => {
         phone: '',
 		job: '',
 		Housing: '',
+		Employment_status: '',
 		Saving_accounts: '',
         Checking_account: '',
         Credit_amount: '',
