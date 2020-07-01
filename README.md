@@ -3,7 +3,7 @@
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 0.853 seconds.
+Conversion time: 1.001 seconds.
 
 
 Using this Markdown file:
@@ -16,7 +16,7 @@ Using this Markdown file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β28
-* Wed Jul 01 2020 15:00:25 GMT-0700 (PDT)
+* Wed Jul 01 2020 15:03:10 GMT-0700 (PDT)
 * Source doc: About Us
 * This is a partial selection. Check to make sure intra-doc links work.
 * Tables are currently converted to HTML tables.
@@ -43,8 +43,8 @@ EasyUdhaar is a **crowdsourced microlending** startup that aims to** collaborate
 
 
 1. Clone the easyUdhaar repo
-2. Run `cd easyUdhaar && npm install’
-3. Run `npm run development’
+2. Run `cd easyUdhaar && npm install`
+3. Run `npm run development`
 4. Project will be deployed on `http://localhost:3000/`
 
 
@@ -125,8 +125,8 @@ He can lend to multiple campaigns and the system monitors his contributions to d
 
 ## Borrower
 
-A borrower set up a campaign to generate funds which will constitute a business or a personal loan. He is permitted to setup only one campaign at a time. The information he fills up in the application will be used to calculate the credit score. His previous credit scores will be used as well and generate a new credit score via a time-series integration.
+A borrower **set up a campaign** to generate funds which will constitute a **business or a personal** loan. He is permitted to setup only one campaign at a time. The information he fills up in the application will be used to **calculate the credit score**. His **previous credit scores** will be used as well and generate a new credit score **via a time-series integration.**
 
-The borrower will be able to track is campaign progress and fund status via the Dashboard. He will also be able to repay his campaign’s lenders. 
+The borrower will be able to **track his campaign progress and fund status** via the Dashboard. He will also be able to repay his campaign’s lenders. 
 
 Early repayment is incentivised by lower interest rate.
