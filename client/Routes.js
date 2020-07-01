@@ -11,7 +11,8 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView,
   BusinessLoan as BusinessLoanView,
-  PersonalLoan as PersonalLoanView 
+  PersonalLoan as PersonalLoanView,
+  ExploreCampaigns as ExploreCampaignsView
 } from './views';
 
 const Routes = () => {
@@ -28,6 +29,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/dashboard"
+      />
+      <PrivateRoute
+        component={ExploreCampaignsView}
+        exact
+        layout={MainLayout}
+        path="/explore"
       />
       <PrivateRoute
         component={BusinessLoanView}

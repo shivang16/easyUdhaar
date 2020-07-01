@@ -6,3 +6,4 @@ export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
 export { default as BusinessLoan } from './BusinessLoan';
 export { default as PersonalLoan } from './PersonalLoan';
+export { default as ExploreCampaigns } from './ExploreCampaigns';
