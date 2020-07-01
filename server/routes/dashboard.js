@@ -138,7 +138,8 @@ router.get('/exploreCampaigns',verify,async (req,res)=>{
                 "campaignType":data[i].loanType,
                 "campaignProgress":progress,
                 "amountInital":data[i].amount,
-                "amountReq":data[i].amountExpected
+                "amountReq":data[i].amountExpected,
+                "campaignId":data[i]._id
             };
             finalObject.push(temp);
 
