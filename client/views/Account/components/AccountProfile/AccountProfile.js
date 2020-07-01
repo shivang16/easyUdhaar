@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
+import auth from './../../../../auth/auth-helper'
 import {
   Card,
   CardActions,
@@ -44,8 +45,10 @@ const AccountProfile = props => {
 
   const classes = useStyles();
 
+  const userSession = JSON.parse(auth.getJWT());
+
   const user = {
-    name: 'Amogh J',
+    name: userSession.user.name,
     city: 'Mumbai',
     country: 'India',
     timezone: 'IST',
@@ -64,7 +67,7 @@ const AccountProfile = props => {
               gutterBottom
               variant="h2"
             >
-              Amogh J
+              {user.name}
             </Typography>
             <Typography
               className={classes.locationText}
