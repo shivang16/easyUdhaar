@@ -24,7 +24,7 @@ router.post('/business',verify,async (req,res)=>{
 
     // Fetching data from body
     const {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
-    job,placeOwned,yearsRunning,cashMajority,currentBalance,assetValue,age,duration,checkingAccount} = req.body;   // Here we don't need to add borrowerId it can be taken form token
+    job,placeOwned,yearsRunning,cashMajority,goods,assetValue,age,duration,checkingAccount} = req.body;   // Here we don't need to add borrowerId it can be taken form token
     
     
     //Validating campaign 
@@ -58,11 +58,11 @@ router.post('/business',verify,async (req,res)=>{
         "placeOwned" : placeOwned,
         "yearsRunning" : yearsRunning,
         "cashMajority" : cashMajority,
-        "currentBalance": currentBalance,
         "assetValue": assetValue,
         "age":age,
         "duration":duration,
-        "checkingAccount":checkingAccount
+        "checkingAccount":checkingAccount,
+        "goods":goods
         }
 
         const validate_check2 = validator.businessQuestionValidation(Questions);
@@ -84,8 +84,7 @@ router.post('/business',verify,async (req,res)=>{
             "Value of assets": assetValue,
             "prev_score": currentUser.creditScoreBusiness,
             "prev_time": currentUser.previousLoan
-
-    }
+        }
         var options = {
             method: 'POST',
             uri: 'https://visa-credit.herokuapp.com/predict-biz',
@@ -99,7 +98,7 @@ router.post('/business',verify,async (req,res)=>{
                 // POST succeeded...
                 const apiScore = parsedBody.results['credit-score'];
                 console.log(apiScore);
-                if(apiScore>140)
+                if(apiScore>100)
                 {
                 
                     console.log(apiScore);

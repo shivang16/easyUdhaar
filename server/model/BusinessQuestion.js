@@ -53,6 +53,10 @@ const businessQuestionSchema = new mongoose.Schema({
     job:{
         type:Number,
         default:0
+    },
+    goods:{
+        type:Boolean,
+        default:false
     }
 
 });

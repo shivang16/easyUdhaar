@@ -126,11 +126,11 @@ const businessQuestionValidate = function(data) {
         placeOwned: Joi.bool().required(),
         yearsRunning: Joi.number().required(),
         cashMajority: Joi.bool().required(),
-        currentBalance: Joi.number().required(),
         assetValue: Joi.number().required(),
         age:Joi.number().required(),
         duration: Joi.number().required(),
-        checkingAccount: Joi.number().required()
+        checkingAccount: Joi.number().required(),
+        goods:Joi.bool().required()
     });
 
     //Validating the user before use
