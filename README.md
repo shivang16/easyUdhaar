@@ -26,7 +26,7 @@ Conversion notes:
 
 # 💳easyUdhaar
 
-easyUdhaar is a **crowdsourced microlending** startup that aims to **collaborate with the government** to provide loans under various categories **at an affordable rate**.
+easyUdhaar is a **microlending** startup that **uses financial and non-financial data** to analyze **credit risk** of an applicant and then provide **crowdsourced loans** **at an affordable rate**. It proposes to **collaborate with the government** by integrating **pre-existing schemes** to **identify people most in need** of capital and also to **insure against loan default** under certain conditions.
 
 
 ## The USPs of **easyUdhaar** are :
