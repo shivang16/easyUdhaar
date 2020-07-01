@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/Money';
+import auth from './../../../../auth/auth-helper';
+import { dashboard } from './../../../../auth/api-dashboard';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,6 +46,22 @@ const AmountLent = props => {
 
   const classes = useStyles();
 
+  const [myprops, setMyprops] = useState([]);
+  const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
+  
+  console.log(myprops);
+
+  useEffect(() => {
+    dashboard(token).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        setMyprops(data);
+      }
+    });
+  }, []);
+
   return (
     <Card
       {...rest}
@@ -63,7 +81,7 @@ const AmountLent = props => {
             >
               Total Amount Lent
             </Typography>
-            <Typography variant="h3"><p>&#x20B9; 24,000</p></Typography>
+            <Typography variant="h3"><p>&#x20B9; {myprops.totalAmountLend}</p></Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

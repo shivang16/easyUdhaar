@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Grid } from '@material-ui/core';
 import { dashboard } from './../../auth/api-dashboard';
@@ -23,9 +23,27 @@ const useStyles = makeStyles(theme => ({
 const Dashboard = () => {
   const classes = useStyles();
 
+  const [myprops, setMyprops] = useState([]);
   const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
   const role = userSession.user.role;
-  // console.log(userSession.user.name);
+  
+  console.log(myprops);
+
+  useEffect(() => {
+    dashboard(token).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        setMyprops(data);
+      }
+    });
+  }, []);
+  
+  let percent;
+  if(myprops !== [])
+    percent = (myprops.totalAmountRecived / myprops.totalAmountLend) * 100 ;
+  console.log(userSession.user.name);
 
   return (
     <div className={classes.root}>
@@ -135,7 +153,7 @@ const Dashboard = () => {
             >
               <TasksProgress
               text="Return on Investment"
-              percent = {12}
+              percent = {percent.toPrecision(2)}
                />
             </Grid>
           )

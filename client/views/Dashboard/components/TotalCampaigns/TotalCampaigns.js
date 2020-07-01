@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import PeopleIcon from '@material-ui/icons/PeopleOutlined';
+import { dashboard } from './../../../../auth/api-dashboard';
+import auth from './../../../../auth/auth-helper';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,6 +47,23 @@ const TotalUsers = props => {
 
   const classes = useStyles();
 
+  const [myprops, setMyprops] = useState([]);
+  const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
+  const role = userSession.user.role;
+  
+  // console.log(myprops);
+
+  useEffect(() => {
+    dashboard(token).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        setMyprops(data);
+      }
+    });
+  }, []);
+
   return (
     <Card
       {...rest}
@@ -64,7 +83,7 @@ const TotalUsers = props => {
             >
               Total Campaigns (Lent)
             </Typography>
-            <Typography variant="h3">1,600</Typography>
+            <Typography variant="h3">{myprops.totalLending}</Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

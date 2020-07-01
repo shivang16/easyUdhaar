@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -20,6 +20,8 @@ import {
 
 import mockData from './data';
 import { StatusBullet } from '../../../../components';
+import { dashboard } from '../../../../auth/api-dashboard';
+import auth from '../../../../auth/auth-helper';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -52,10 +54,29 @@ const statusColors = {
 
 const LendingHistory = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
 
   const [orders] = useState(mockData);
+  const [myprops, setMyprops] = useState([]);
+  const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
+  
+  // console.log(myprops);
+
+  useEffect(() => {
+    dashboard(token).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        setMyprops(data);
+      }
+    });
+  }, []);
+
+  let userData;
+  if(myprops)
+    userData = myprops.data;
+
 
   return (
     <Card
@@ -92,24 +113,24 @@ const LendingHistory = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                { userData && userData.map(data => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={data.transactionId}
                   >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
+                    <TableCell>{data.transactionId}</TableCell>
+                    <TableCell>{data.name}</TableCell>
                     <TableCell>
-                      {moment(order.createdAt).format('DD/MM/YYYY')}
+                      {moment(data.lendingDate).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell>
                       <div className={classes.statusContainer}>
                         <StatusBullet
                           className={classes.status}
-                          color={statusColors[order.status]}
+                          color={statusColors[(data.status) ? "repaid" : "pending"]}
                           size="sm"
                         />
-                        {order.status}
+                        { (data.status) ? "repaid" : "pending" }
                       </div>
                     </TableCell>
                   </TableRow>
