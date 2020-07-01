@@ -115,10 +115,10 @@ router.get('/exploreCampaigns',verify,async (req,res)=>{
         if(err) return res.send("error: " + err);
         else
         {
-            var finalObject = {};
+            var finalObject = [];
         for(var i=0;i<data.length;i++)
         {
-            console.log(data[i]);
+            //console.log(data[i]);
             const borrower = await User.findOne({_id:data[i].borrowerId})
             if(borrower==null) continue;
             const borrowerName = borrower.firstName + " " + borrower.lastName;
@@ -131,7 +131,7 @@ router.get('/exploreCampaigns',verify,async (req,res)=>{
             {
                 cs = borrower.creditScorePersonal;
             }
-            const progress = data[i].amountExpected/data[i].amount;
+            const progress = (data[i].amountGet)/data[i].amount;
             const temp = {
                 "borrowerName":borrowerName,
                 "creditScore":cs,
@@ -143,7 +143,7 @@ router.get('/exploreCampaigns',verify,async (req,res)=>{
             finalObject.push(temp);
 
         }
-        return res.json({data:finalObject});
+        return res.json(finalObject);
         }
         
     });
