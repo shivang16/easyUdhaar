@@ -49,23 +49,26 @@ const useStyles = makeStyles(theme => ({
 
 const ExploreCampaigns = () => {
   const classes = useStyles();
-  // const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);
+  let myprops = [1];
 
   const userSession = JSON.parse(auth.getJWT());
   const token = userSession.token;
-
+  
   useEffect(() => {
     const abortController = new AbortController();
     const signal = abortController.signal;
     console.log(token);
     explore(token, signal).then((data) => {
       if (data && data.error) {
-        console.log(data.error);
+          myprops = data[0];
       } else {
-        console.log(data);
+        console.log(data)
+        myprops = data;
+        console.log("myprop",myprops)
       }
     });
-
+    console.log("myprops", myprops)
     return function cleanup(){
       abortController.abort()
     };
@@ -73,26 +76,33 @@ const ExploreCampaigns = () => {
 
   return (
     <div className={classes.root}>
-    <div style={{padding:"20px"}}>
-    <Typography
-    variant="h1"
-    >
-      Explore Active Campaigns
-    </Typography>
-    
-    </div>
+      <div style={{ padding: '20px' }}>
+        <Typography variant="h1">Explore Active Campaigns</Typography>
+      </div>
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
-          <ListSubheader component="div" id="nested-list-subheader">
-            
-          </ListSubheader>
+          <ListSubheader
+            component="div"
+            id="nested-list-subheader"></ListSubheader>
         }
-        className={classes.root}
-      >
+        className={classes.root}>
         <div className={classes.horiz}>
-          <ExploreCard />
+          {myprops.map(currDetail => (
+            <div>
+              {
+                <ExploreCard
+                  borrowerName= "bad"//{currDetail.borrowerName}
+                  amountInital={currDetail.amountInital}
+                  amountReq={currDetail.amountReq}
+                  campaignId={currDetail.campaignId}
+                  campaignProgress={currDetail.campaignProgress}
+                  campaignType={currDetail.campaignType}
+                  creditScore={currDetail.creditScore}></ExploreCard>
+              }
+            </div>
+          ))}
         </div>
       </List>
     </div>
