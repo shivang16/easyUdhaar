@@ -21,7 +21,9 @@ const useStyles = makeStyles(theme => ({
 
 const Dashboard = () => {
   const classes = useStyles();
-  // const userSession = JSON.parse(auth.getJWT());
+
+  const userSession = JSON.parse(auth.getJWT());
+  const role = userSession.user.role;
   // console.log(userSession.user.name);
 
   return (
@@ -30,60 +32,84 @@ const Dashboard = () => {
         container
         spacing={4}
       >
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xl={3}
-          xs={12}
-        >
-          <AmountLent />
-        </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xl={3}
-          xs={12}
-        >
-          <TotalCampaigns />
-        </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xl={3}
-          xs={12}
-        >
-          <TasksProgress />
-        </Grid>
-        <Grid
-          item
-          lg={3}
-          sm={6}
-          xl={3}
-          xs={12}
-        >
-          <TotalRewards />
-        </Grid>
-        <Grid
-          item
-          lg={12}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <ActiveCampaigns />
-        </Grid>
-        <Grid
-          item
-          lg={12}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <LendingHistory />
-        </Grid>
+        {
+          !role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <AmountLent />
+            </Grid>
+          )
+        }
+        {
+          !role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <TotalCampaigns />
+            </Grid>
+          )
+        }
+        {
+          role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <TasksProgress />
+            </Grid>
+          )
+        }
+        {
+          !role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <TotalRewards />
+            </Grid>
+          )
+        }
+        {
+          role && (
+            <Grid
+            item
+            lg={12}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <ActiveCampaigns />
+          </Grid>
+          )
+        }
+        {
+          !role && (
+            <Grid
+              item
+              lg={12}
+              md={12}
+              xl={9}
+              xs={12}
+            >
+              <LendingHistory />
+            </Grid>
+          )
+        }
       </Grid>
     </div>
   );
