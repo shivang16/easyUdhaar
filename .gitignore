@@ -2,5 +2,6 @@
 /dist/
 /data/
 /server/cred/
+/server/credentials.json
 npm-debug.log
 .env
