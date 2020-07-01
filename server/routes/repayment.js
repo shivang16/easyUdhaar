@@ -13,7 +13,7 @@ router.post('/',verify,async (req,res)=>{
     // Account verification completed?? 
     const currentUser = await User.findOne({_id:req.user._id});
 
-    if(currentUser.accountType==false)  return res.send("You are a lender you can't repay");
+    //if(currentUser.accountType==false)  return res.send("You are a lender you can't repay");
   
     // Creating New User And saving in Database
     const {lendingId,amountGiven} = req.body;  
@@ -31,7 +31,7 @@ router.post('/',verify,async (req,res)=>{
         headers:{
             'auth-token': req.header('auth-token')
         },
-        uri: 'http://localhost:3000/payment',
+        uri: 'http://localhost:4500/payment',
         body: {
             "senderId":currentUser._id,
             "reciverId":campaignOwner._id,

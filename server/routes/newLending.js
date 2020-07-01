@@ -12,7 +12,7 @@ const Transaction = require('../model/Transaction')
 router.post('/',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
-    if(currentUser.accountType==true)  return res.send("You are a borrower you can't lend");
+    // if(currentUser.accountType==true)  return res.send("You are a borrower you can't lend");
 
     // Checking if account is verified or not
     // if(currentUser.profileVerified == false){
@@ -38,7 +38,7 @@ router.post('/',verify,async (req,res)=>{
         headers:{
             'auth-token': req.header('auth-token')
         },
-        uri: 'http://localhost:3000/payment',
+        uri: 'http://localhost:4500/payment',
         body: {
             "senderId":currentUser._id,
             "reciverId":campaignOwnerId,

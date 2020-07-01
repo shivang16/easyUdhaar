@@ -1,12 +1,11 @@
 const router = require('express').Router();
-var api = require('../src/funds_transfer_api').funds_transfer_api;
-var authCredentials = require('../credentials.json');
-const verify = require('./verifyToken');
+var api = require('./src/funds_transfer_api').funds_transfer_api;
+var authCredentials = require('./credentials.json');
 const { async } = require('q');
 var funds_transfer_api = new api(authCredentials);
-const User = require('../model/User');
+const User = require('./User');
 
-router.post('/',verify,async (req,res)=>{
+router.post('/',async (req,res)=>{
     
     const senderId = req.body.senderId;
     const reciverId = req.body.reciverId;
@@ -14,8 +13,8 @@ router.post('/',verify,async (req,res)=>{
     const sender = await User.findOne({_id:senderId});
     const reciver = await User.findOne({_id:reciverId});
 
-    console.log(sender);
-    console.log(reciver);
+    // console.log(sender);
+    // console.log(reciver);
 
     if(sender.balance < amountTransfered){
         return res.status(500).send("Not enough amount to make this payment!");

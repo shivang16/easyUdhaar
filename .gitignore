@@ -5,3 +5,4 @@
 /server/credentials.json
 npm-debug.log
 .env
+/server/payment/node_modules
