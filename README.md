@@ -3,7 +3,7 @@
 <!-----
 NEW: Check the "Suppress top comment" option to remove this info from the output.
 
-Conversion time: 0.795 seconds.
+Conversion time: 0.659 seconds.
 
 
 Using this Markdown file:
@@ -16,22 +16,11 @@ Using this Markdown file:
 Conversion notes:
 
 * Docs to Markdown version 1.0β28
-* Wed Jul 01 2020 14:45:49 GMT-0700 (PDT)
+* Wed Jul 01 2020 14:50:34 GMT-0700 (PDT)
 * Source doc: About Us
 * This is a partial selection. Check to make sure intra-doc links work.
 * Tables are currently converted to HTML tables.
-
-WARNING:
-You have 3 H1 headings. You may want to use the "H1 -> H2" option to demote all headings by one level.
-
 ----->
-
-
-<p style="color: red; font-weight: bold">>>>>>  gd2md-html alert:  ERRORs: 0; WARNINGs: 1; ALERTS: 0.</p>
-<ul style="color: red; font-weight: bold"><li>See top comment block for details on ERRORs and WARNINGs. <li>In the converted Markdown or HTML, search for inline alerts that start with >>>>>  gd2md-html alert:  for specific instances that need correction.</ul>
-
-<p style="color: red; font-weight: bold">Links to alert messages:</p>
-<p style="color: red; font-weight: bold">>>>>> PLEASE check and correct alert issues and delete this message and the inline alerts.<hr></p>
 
 
 
@@ -49,17 +38,17 @@ EasyUdhaar is a **crowdsourced microlending** startup that aims to** collaborate
 3. The** involvement of pre-exisiting government schemes **to provide aid (not loans) to people whose **credit scores are above a certain risk threshold**. This helps the government by** identifying the people who need government aid the most**. Certain government schemes that provide **default insurance** to banks are also highlighted and further detailed upon in the presentation
 
 
-# Deployment:
+## Deployment:
 
 
 
 1. Clone the easyUdhaar repo
-2. Run `‘cd easyUdhaar && npm install’`
-3. Run `‘npm run development’`
+2. Run `cd easyUdhaar && npm install’
+3. Run `npm run development’
 4. Project will be deployed on `http://localhost:3000/`
 
 
-# TechStack:
+## TechStack:
 
 
 <table>
@@ -117,7 +106,7 @@ EasyUdhaar is a **crowdsourced microlending** startup that aims to** collaborate
 
 
 
-# Types of Users:
+## Types of Users:
 
 
 
