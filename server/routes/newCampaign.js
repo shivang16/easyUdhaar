@@ -145,12 +145,12 @@ router.post('/personal',verify,async (req,res)=>{
     const currentUser = await User.findOne({_id:req.user._id});
     
     // Checking if account is verified or not
-    if(currentUser.profileVerified == false){
-        return res.send("Profile is not verified!");
-    }
+    // if(currentUser.profileVerified == false){
+    //     return res.send("Profile is not verified!");
+    // }
 
     // Checking if personal is defaulter or not
-    if(currentUser.defaulter == true) return res.send("You are a defaulter!");
+    // if(currentUser.defaulter == true) return res.send("You are a defaulter!");
 
 
     // Fetching data from body
@@ -168,10 +168,10 @@ router.post('/personal',verify,async (req,res)=>{
 
     // Check if same type of loan is already taken by user
     const loanTaken = await User.findOne({_id:currentUser._id,personalLoan:true});
-    if(loanTaken != null){
-        return res.send("Loan Already taken");
-    }
-    else{
+    // if(loanTaken != null){
+    //     return res.send("Loan Already taken");
+    // }
+    // else{
         let campaign = {};
         campaign.borrowerId = currentUser._id;
         campaign.loanType = 2;
@@ -263,11 +263,18 @@ router.post('/personal',verify,async (req,res)=>{
                     currentUser.previousLoan = Date.now();
                     await currentUser.save();
 
-                    res.send(campaignModel);
+                    // res.send(campaignModel);
+                    return res.json({
+                        creditScore: apiScore
+                    });
                 
                 }
                 else{
-                    res.send("Loan Not Approved");
+                    // res.send("Loan Not Approved");
+                    return res.json({
+                        message: "Loan Not Approves",
+                        creditScore: apiScore
+                    });
                 }
            })
            .catch(function (err) {
@@ -276,7 +283,7 @@ router.post('/personal',verify,async (req,res)=>{
                 console.log(err);
                 // POST failed...
             });
-    }
+    // }
 });
 
 module.exports = router;

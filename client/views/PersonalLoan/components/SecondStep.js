@@ -197,7 +197,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                   {/* <TextField
                    */}
 
-                  <FormControl
+                  {/* <FormControl
                     className={classes.form}
                     variant="outlined"
                     required
@@ -216,6 +216,23 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
                       <MenuItem value={'domestic_appliances'}>
                         Domestic Appliances
                       </MenuItem>
+                    </Select>
+                  </FormControl> */}
+                  <FormControl variant="outlined" required className={classes.form}>
+                    <InputLabel>Why do you need a Loan?</InputLabel>
+                    <Select
+                      native
+                      onChange={handleChange('Purpose')}
+                      label="Purpose"
+                      value={Purpose}
+                    >
+                      <option aria-label="None" value="" />
+                      <option value="radio">Radio/TV</option>
+                      <option value="repairs">Repairs</option>
+                      <option value="education">Education</option>
+                      <option value="vacation">Vacation</option>
+                      <option value="car">Car</option>
+                      <option value="domestic_appliances">Domestic Appliances</option>
                     </Select>
                   </FormControl>
                 </div>

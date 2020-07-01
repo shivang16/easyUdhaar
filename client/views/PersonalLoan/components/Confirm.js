@@ -3,8 +3,9 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';;
-
+import Button from '@material-ui/core/Button';
+import auth from '../../../auth/auth-helper';
+import { personal } from '../../../auth/api-businessloan';
 // Destructure props
 const Confirm = ({ handleNext, handleBack, 
     values: 
@@ -32,6 +33,45 @@ const Confirm = ({ handleNext, handleBack,
 		Internet_devices,
 		Vehicles
     } }) => {
+
+		const handleSubmit = (event) => {
+			event.preventDefault();
+			const formData = {
+				amountExpected: Credit_amount || undefined,
+				eatOut: Eat_out || undefined,
+				nearestMajorCity: Nearest_major_city || undefined,
+				annualIncome: Annual_income || undefined,
+				checkingAccount: Checking_account || undefined,
+				savingAccount: "120000" || undefined,
+				jobStatus: job || undefined,
+				lastTravel: Times_travelled_more_than_100km_in_last_60days || undefined,
+				vechicles: Vehicles || undefined,
+				age: age || undefined,
+				sex: gender || undefined,
+				houseType: Housing || undefined,
+				cellBill: Monthly_cell_bill || undefined,
+				familyMembers: Family_members || undefined,
+				earningMembers: Earning_member || undefined,
+				duration: Duration || undefined,
+				internetDevices: Internet_devices || undefined,
+				literateAdults: Literate_fam || undefined,
+				cibilScore: "876",
+				purpose: Purpose || undefined
+			}
+			console.log(formData);
+			const userSession = JSON.parse(auth.getJWT());
+			const token = userSession.token;
+			// handleNext();
+			personal(token, formData).then((data) => {
+				if(data.error) {
+					console.log(data.error);
+				} else {
+					handleNext();
+				}
+			})
+		}
+
+
 	return (
 		<Fragment>
 			<List disablePadding>
@@ -171,7 +211,7 @@ const Confirm = ({ handleNext, handleBack,
 				<Button variant="contained" color="default" onClick={handleBack}>
 					Back
 				</Button>
-				<Button style={{ marginLeft: 20 }} variant="contained" color="secondary" onClick={handleNext}>
+				<Button style={{ marginLeft: 20 }} variant="contained" color="secondary" onClick={handleSubmit}>
 					Confirm & Continue
 				</Button>
 			</div>
