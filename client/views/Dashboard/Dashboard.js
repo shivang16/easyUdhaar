@@ -6,6 +6,7 @@ import auth from './../../auth/auth-helper';
 
 import {
   AmountLent,
+  AmountBorrowed,
   TasksProgress,
   LendingHistory,
   TotalRewards,
@@ -67,7 +68,74 @@ const Dashboard = () => {
               xl={3}
               xs={12}
             >
-              <TasksProgress />
+              <AmountBorrowed
+                text="Credit Amount Expected"
+                amount="24,000"
+              />
+            </Grid>
+          )
+        }
+        {
+          role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <AmountBorrowed
+                text="Credit Amount Funded"
+              amount="10,000"
+              />
+            </Grid>
+          )
+        }
+        {
+          role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <TasksProgress
+              text="Your Campaign Progress"
+              percent={70}
+               />
+            </Grid>
+          )
+        }
+        {
+          role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <AmountBorrowed
+                text="Amount Repaid"
+                amount="5,000"
+              />
+            </Grid>
+          )
+        }
+        {
+          !role && (
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <TasksProgress
+              text="Return on Investment"
+              percent = {12}
+               />
             </Grid>
           )
         }

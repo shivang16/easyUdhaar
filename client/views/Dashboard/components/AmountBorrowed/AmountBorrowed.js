@@ -2,15 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardContent,
-  Grid,
-  Typography,
-  Avatar,
-  LinearProgress
-} from '@material-ui/core';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
+import MoneyIcon from '@material-ui/icons/Money';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,8 +17,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700
   },
   avatar: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    backgroundColor: theme.palette.error.main,
     height: 56,
     width: 56
   },
@@ -33,16 +25,26 @@ const useStyles = makeStyles(theme => ({
     height: 32,
     width: 32
   },
-  progress: {
-    marginTop: theme.spacing(3)
+  difference: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center'
+  },
+  differenceIcon: {
+    color: theme.palette.error.dark
+  },
+  differenceValue: {
+    color: theme.palette.error.dark,
+    marginRight: theme.spacing(1)
   }
 }));
 
-const TasksProgress = props => {
+const AmountBorrowed = props => {
   const { className, ...rest } = props;
-  const text = props.text;
-  const percent = props.percent;
+
   const classes = useStyles();
+  const myText = props.text;
+  const myAmount = props.amount;
 
   return (
     <Card
@@ -51,7 +53,7 @@ const TasksProgress = props => {
     >
       <CardContent>
         <Grid
-          container 
+          container
           justify="space-between"
         >
           <Grid item>
@@ -61,28 +63,23 @@ const TasksProgress = props => {
               gutterBottom
               variant="body2"
             >
-              {text}
+              {myText}
             </Typography>
-            <Typography variant="h3">{percent}%</Typography>
+            <Typography variant="h3"><p>&#x20B9; {myAmount}</p></Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <InsertChartIcon className={classes.icon} />
+              <MoneyIcon className={classes.icon} />
             </Avatar>
           </Grid>
         </Grid>
-        <LinearProgress
-          className={classes.progress}
-          value={percent}
-          variant="determinate"
-        />
       </CardContent>
     </Card>
   );
 };
 
-TasksProgress.propTypes = {
+AmountBorrowed.propTypes = {
   className: PropTypes.string
 };
 
-export default TasksProgress;
+export default AmountBorrowed;
