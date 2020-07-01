@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -50,25 +50,20 @@ const useStyles = makeStyles(theme => ({
 const ExploreCampaigns = () => {
   const classes = useStyles();
   // const [expanded, setExpanded] = React.useState(false);
-
+  const [myprops, setMyprops] = useState([]);
   const userSession = JSON.parse(auth.getJWT());
   const token = userSession.token;
 
+  console.log(myprops);
+
   useEffect(() => {
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-    console.log(token);
-    explore(token, signal).then((data) => {
+    explore(token).then((data) => {
       if (data && data.error) {
         console.log(data.error);
       } else {
-        console.log(data);
+        setMyprops(data);
       }
     });
-
-    return function cleanup(){
-      abortController.abort()
-    };
   }, []);
 
   return (
