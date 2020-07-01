@@ -50,7 +50,7 @@ const AmountLent = props => {
   const userSession = JSON.parse(auth.getJWT());
   const token = userSession.token;
   
-  console.log(myprops);
+  // console.log(myprops);
 
   useEffect(() => {
     dashboard(token).then((data) => {

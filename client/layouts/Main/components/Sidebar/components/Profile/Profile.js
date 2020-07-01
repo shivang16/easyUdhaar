@@ -27,6 +27,7 @@ const Profile = props => {
 
   const classes = useStyles();
   const userSession = JSON.parse(auth.getJWT());
+  const role = userSession.user.role;
 
   const user = {
     name: userSession.user.name,
@@ -50,12 +51,16 @@ const Profile = props => {
       >
         {user.name}
       </Typography>
-      <Button variant="outlined">
-      <div style={{padding:"5px"}}>
-          <Typography variant="body2">Credit Score</Typography>
-        </div>
-      <Typography variant="h2">777</Typography>
-      </Button>
+      {
+        role && (
+          <Button variant="outlined">
+            <div style={{padding:"5px"}}>
+                <Typography variant="body2">Credit Score</Typography>
+            </div>
+            <Typography variant="h2">777</Typography>
+          </Button>
+        )
+      }
     </div>
   );
 };

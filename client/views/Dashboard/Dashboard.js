@@ -28,7 +28,7 @@ const Dashboard = () => {
   const token = userSession.token;
   const role = userSession.user.role;
   
-  console.log(myprops);
+  // console.log(myprops);
 
   useEffect(() => {
     dashboard(token).then((data) => {
@@ -43,7 +43,7 @@ const Dashboard = () => {
   let percent;
   if(myprops !== [])
     percent = (myprops.totalAmountRecived / myprops.totalAmountLend) * 100 ;
-  console.log(userSession.user.name);
+  // console.log(userSession.user.name);
 
   return (
     <div className={classes.root}>
