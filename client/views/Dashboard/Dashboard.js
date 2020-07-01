@@ -85,8 +85,9 @@ const Dashboard = () => {
               xs={12}
             >
               <AmountBorrowed
-                text="Credit Amount Funded"
-              amount="10,000"
+                text="Credit Amount received"
+              amount="760.45"
+              // iscash = {false}
               />
             </Grid>
           )

@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Avatar, Typography } from '@material-ui/core';
+import { Avatar, Typography, Button } from '@material-ui/core';
 import auth from './../../../../../../auth/auth-helper'
 
 const useStyles = makeStyles(theme => ({
@@ -46,11 +46,16 @@ const Profile = props => {
       />
       <Typography
         className={classes.name}
-        variant="h4"
+        variant="h3"
       >
         {user.name}
       </Typography>
-      {/* <Typography variant="body2">{user.bio}</Typography> */}
+      <Button variant="outlined">
+      <div style={{padding:"5px"}}>
+          <Typography variant="body2">Credit Score</Typography>
+        </div>
+      <Typography variant="h2">777</Typography>
+      </Button>
     </div>
   );
 };

@@ -45,7 +45,7 @@ const AmountBorrowed = props => {
   const classes = useStyles();
   const myText = props.text;
   const myAmount = props.amount;
-
+  const iscash =true;
   return (
     <Card
       {...rest}
@@ -57,7 +57,10 @@ const AmountBorrowed = props => {
           justify="space-between"
         >
           <Grid item>
-            <Typography
+            {iscash&&(
+              <div>
+              <Typography
+          
               className={classes.title}
               color="textSecondary"
               gutterBottom
@@ -65,7 +68,23 @@ const AmountBorrowed = props => {
             >
               {myText}
             </Typography>
+            
             <Typography variant="h3"><p>&#x20B9; {myAmount}</p></Typography>
+            </div>
+            )}
+            {!iscash && (<div><Typography
+            
+              className={classes.title}
+              color="textSecondary"
+              gutterBottom
+              variant="body2"
+            >
+              {myText}
+            </Typography>
+
+              <Typography variant="h3"><p>{myAmount}</p></Typography>
+            </div>
+            )}
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>

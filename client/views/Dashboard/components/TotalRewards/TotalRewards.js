@@ -52,19 +52,30 @@ const TotalRewards = props => {
               gutterBottom
               variant="body2"
             >
-              Total Rewards
+              Total Incentives
             </Typography>
             <Typography
               // color="inherit"
-              variant="h2"
+              variant="h3"
             >
               <p>&#x20B9; 23,200</p>
             </Typography>
           </Grid>
           <Grid item>
-            <Avatar className={classes.avatar}>
-              <AttachMoneyIcon className={classes.icon} />
-            </Avatar>
+            <Typography
+              className={classes.title}
+              // color="inherit"
+              gutterBottom
+              variant="body2"
+            >
+              Govt. Contributions
+            </Typography>
+            <Typography
+              // color="inherit"
+              variant="h3"
+            >
+              <p>&#x20B9; 23,200</p>
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>
