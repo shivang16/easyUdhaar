@@ -35,7 +35,7 @@ EasyUdhaar is a **crowdsourced microlending** startup that aims to **collaborate
 
 1. The use of non-formal data to calculate the **credit score** of a potential borrower which **empowers** the poor borrowers (who are not able to provide sufficient collateral) to avail loans at low rates **promoting financial inclusion.**
 2. A unique way of calculating lender rewards called **EasyRewards**, which leverage the **economies of scale **effect of the Visa network to generate **sustainable rewards **while **rapidly growing the number of transactions** for Visa
-3. The** involvement of pre-exisiting government schemes **to provide aid (not loans) to people whose **credit scores are above a certain risk threshold**. This helps the government by** identifying the people who need government aid the most**. Certain government schemes that provide **default insurance** to banks are also highlighted and further detailed upon in the presentation
+3. The **involvement of pre-exisiting government schemes **to provide aid (not loans) to people whose **credit scores are above a certain risk threshold**. This helps the government by **identifying the people who need government aid the most**. Certain government schemes that provide **default insurance** to banks are also highlighted and further detailed upon in the presentation
 
 
 ## Deployment:
