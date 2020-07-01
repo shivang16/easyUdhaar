@@ -118,7 +118,7 @@ easyUdhaar is a **microlending** startup that **uses financial and non-financial
 
 ## Lender
 
-A lender can **explore active campaigns** and **lend money to the campaign** of their choice and thus earn interest and as well as **EasyRewards** on it.
+A lender can **explore active campaigns** and **lend money to the campaign** of their choice and thus earn interest and as well as **EasyRewards**.
 
 He can lend to multiple campaigns and the system monitors his contributions to different campaigns, the return on his investment and his earned **EasyRewards** on the Dashboard.
 
