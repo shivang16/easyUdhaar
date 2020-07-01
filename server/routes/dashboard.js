@@ -13,13 +13,11 @@ router.get('/',verify,async (req,res)=>{
 
     if(user.accountType == false)
     {
-
-        
         // Lender + history 
         var totalAmountLend = 0;
         var totalAmountRecived = 0;
         var totalLending = 0;
-    await Lender.find({lenderId:user._id},async function (err,data) {
+        await Lender.find({lenderId:user._id},async function (err,data) {
         if(err) return res.send(err);
         var lendingHistory = [];
         for(var i=0;i<data.length;i++)
@@ -67,46 +65,44 @@ router.get('/',verify,async (req,res)=>{
         var repaymentProgress = 0;
         var amountRepayed = 0;
         var campaignHistory = {};
-        await Campaign.find({borrowerId:user._id},async function (err,data) {
-        if(err) return res.send(err);
-            console.log(data);
-        for(var i=0;i<data.length;i++)
-        {
-            totalAmountExpected += (data[i].amount);
-            totalAmountGet += (data[i].amountGet);
-            amountRepayed += (data[i].amountPaid);
 
-            if(data[i].running==true)
+        const campaignList = await Campaign.find({borrowerId:user._id});
+        for(var i=0;i<campaignList.length;i++)
+        {
+            totalAmountExpected += (campaignList[i].amount);
+            totalAmountGet += (campaignList[i].amountGet);
+            amountRepayed += (campaignList[i].amountPaid);
+            if(campaignList[i].running== true)
             {
-                const currentCampaign = data[i];
-                await Lender.find({campaignId:currentCampaign._id},async (err,data1)=>{
-                    if(err) return res.send("error: "+ error);
-                    var differentLenders = []
-                    for(var j=0;j<data1.length;j++)
+                const lenderList = await Lender.find({campaignId:campaignList[i]._id});
+                if(lenderList.length==0)
+                {
+                    //console.log("Hoo");
+                }
+                else
+                {
+                    var lndrlst = [];
+                    for(var j=0;j<lenderList.length;j++)
                     {
                         var randomDate = String(Math.floor(1+Math.random()*27))+"/"+String(Math.floor(1+Math.random()*11))+"/"+String(Math.floor(2021+Math.random(2024)));
                         var temp = {
-                            "lendingId":data1[j].lenderId,
-                            "amountGiven":data1[j].amountGiven,
-                            "amountPending":data1[j].amountToBeRecieved,
+                            "lendingId":lenderList[j].lenderId,
+                            "amountGiven":lenderList[j].amountGiven,
+                            "amountPending":lenderList[j].amountToBeRecieved,
                             "dueDate": randomDate
                         }
-                        console.log(temp);
-                        differentLenders.push(temp);
+                        lndrlst.push(temp);
+                        
                     }
-
-                });
-
-
+                    campaignHistory[campaignList[i]._id] = lndrlst;
+                }
             }
-            
+           
         }
         
-      
-    });
-            campaignProgress = totalAmountGet/totalAmountExpected;
-            repaymentProgress = amountRepayed/totalAmountExpected;
-   
+        campaignProgress = totalAmountGet/totalAmountExpected;
+        repaymentProgress = amountRepayed/totalAmountExpected;
+
         var returnObject = {
             "totalAmountExpected":totalAmountExpected,
             "totalAmountGet":totalAmountGet,
@@ -117,7 +113,6 @@ router.get('/',verify,async (req,res)=>{
             "personalCreditScore":user.creditScorePersonal
 
         }
-        
         return res.json({returnObject});
         
     }
