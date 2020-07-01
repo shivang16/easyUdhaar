@@ -108,7 +108,7 @@ router.get('/',verify,async (req,res)=>{
 
 router.get('/exploreCampaigns',verify,async (req,res)=>{
     const currentUser = await User.findOne({_id:req.user._id});
-    console.log(currentUser);
+    // console.log(currentUser);
     //if(currentUser.accountType==true)  return res.send("You are a borr");
 
     await Campaign.find({running:true},async (err,data)=>{

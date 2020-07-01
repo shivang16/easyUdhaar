@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
@@ -54,23 +54,22 @@ const ExploreCampaigns = () => {
   const userSession = JSON.parse(auth.getJWT());
   const token = userSession.token;
 
-  // useEffect(() => {
-  //   const abortController = new AbortController()
-  //   const signal = abortController.signal
+  useEffect(() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    console.log(token);
+    explore(token, signal).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        console.log(data);
+      }
+    });
 
-  //   explore(token, signal).then((data) => {
-  //     if (data && data.error) {
-  //       // setRedirectToSignin(true)
-  //       console.log(data.error);
-  //     } else {
-  //       // setUser(data)
-  //     }
-  //   })
-
-  //   return function cleanup(){
-  //     abortController.abort()
-  //   }
-  // }, [])
+    return function cleanup(){
+      abortController.abort()
+    };
+  }, []);
 
   return (
     <div className={classes.root}>
