@@ -40,13 +40,10 @@ const BusinessLoan = () => {
 	// Go back to prev step
     const handleBack = () => setSteps(steps - 1);
     
-    const handleChange = input => ({ target: { value } }) => {
-		// Set values to the fields
-		setFields({
-			...fields,
-			[input]: value
-        })
-    }
+	const handleChange = name => event => {
+		// console.log(event.target.value);
+		setFields({ ...fields, [name]: event.target.value });
+	  };
 
 	const handleSteps = step => {
 		switch (step) {

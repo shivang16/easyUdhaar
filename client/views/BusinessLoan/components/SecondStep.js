@@ -61,7 +61,7 @@ const SecondStep = ({ handleNext, handleBack, handleChange,
     { 
         job,
         Checking_account,
-        Credit_amount, 
+        Credit_amount,
         Duration, 
         Annual_income,
         People_employed, 

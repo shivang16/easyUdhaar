@@ -90,7 +90,6 @@ const ExploreCampaigns = () => {
     
     </div>
       <List
-
         component="nav"
         aria-labelledby="nested-list-subheader"
         subheader={
@@ -100,86 +99,84 @@ const ExploreCampaigns = () => {
         }
         className={classes.root}
       >
-      <div className={classes.horiz}>
-      <div className={classes.card}>
-        <Card className={classes.root}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                B
-          </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title="Loan for farming equipment"
-            subheader="June 14, 2020"
-          />
-          <CardMedia
-        className={classes.media}
-            image="../../assets/images/farmer.jpg"
-        title="Paella dish"
-      />
-          <CardContent>
-            <Typography variant="h6" component="p">
-              Bhola is a cotton farmer based in Gondia, Madhya Pradesh
-        </Typography>
-            <div style={{ paddingTop: "10px" }}>
-        <Typography>
-          Amount required: 3000 of 5000  
-        </Typography>
-            </div>
-        <div style={{paddingTop:"10px"}}>
-              <Typography>
-                Campaign Progress: 75%
-        </Typography>
-
-            <LinearProgress
-              className={classes.progress}
-              value={75.5}
-              variant="determinate"
-            />
-          </div>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-              <ShareIcon />
-            </IconButton>
-            <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded
-              })}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
-          </CardActions>
-          <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent className={classes.form}>
-              {/* <div style={{ flexDirection: "row" }}> */}
-              <Grid>
-                <div className={classes.payText}>
-                  <TextField />
+        <div className={classes.horiz}>
+          <div className={classes.card}>
+            <Card className={classes.root}>
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    B
+                  </Avatar>
+                }
+                action={
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                }
+                title="Loan for farming equipment"
+                subheader="June 14, 2020"
+              />
+              <CardMedia
+                className={classes.media}
+                    image="../../assets/images/farmer.jpg"
+                title="Paella dish"
+              />
+              <CardContent>
+                <Typography variant="h6" component="p">
+                  Bhola is a cotton farmer based in Gondia, Madhya Pradesh
+                </Typography>
+                <div style={{ paddingTop: "10px" }}>
+                  <Typography>
+                    Amount required: 3000 of 5000  
+                  </Typography>
                 </div>
-                <div className={classes.payText}>
-                  <Button width="30px" variant="outlined">
-                    Lend to Bhola
-              </Button>
-                </div>
-              </Grid>
-              {/* </div> */}
-            </CardContent>
-          </Collapse>
-        </Card>
-          </div>
+                <div style={{paddingTop:"10px"}}>
+                  <Typography>
+                    Campaign Progress: 75%
+                  </Typography>
 
+                  <LinearProgress
+                    className={classes.progress}
+                    value={75.5}
+                    variant="determinate"
+                  />
+                </div>
+              </CardContent>
+              <CardActions disableSpacing>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
+                <IconButton aria-label="share">
+                  <ShareIcon />
+                </IconButton>
+                <IconButton
+                  className={clsx(classes.expand, {
+                    [classes.expandOpen]: expanded
+                  })}
+                  onClick={handleExpandClick}
+                  aria-expanded={expanded}
+                  aria-label="show more"
+                >
+                  <ExpandMoreIcon />
+                </IconButton>
+              </CardActions>
+              <Collapse in={expanded} timeout="auto" unmountOnExit>
+                <CardContent className={classes.form}>
+                  {/* <div style={{ flexDirection: "row" }}> */}
+                  <Grid>
+                    <div className={classes.payText}>
+                      <TextField />
+                    </div>
+                    <div className={classes.payText}>
+                      <Button width="30px" variant="outlined">
+                        Lend to Bhola
+                      </Button>
+                    </div>
+                  </Grid>
+                </CardContent>
+              </Collapse>
+            </Card>
+          </div>
         </div>
       </List>
     </div>
