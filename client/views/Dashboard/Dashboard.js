@@ -41,9 +41,17 @@ const Dashboard = () => {
   }, []);
   
   let percent;
+  let totalAmountExpected, totalAmountGet, campaignProgress, amountRepayed;
   if(myprops !== [])
     percent = (myprops.totalAmountRecived / myprops.totalAmountLend) * 100 ;
   // console.log(userSession.user.name);
+  if(myprops.returnObject) {
+    totalAmountExpected = myprops.returnObject.totalAmountExpected;
+    totalAmountGet = myprops.returnObject.totalAmountGet;
+    campaignProgress = myprops.returnObject.campaignProgress;
+    amountRepayed = myprops.returnObject.amountRepayed;
+    // console.log(myprops.returnObject);
+  }
 
   return (
     <div className={classes.root}>
@@ -88,7 +96,7 @@ const Dashboard = () => {
             >
               <AmountBorrowed
                 text="Credit Amount Expected"
-                amount="24,000"
+                amount={totalAmountExpected}
               />
             </Grid>
           )
@@ -104,7 +112,7 @@ const Dashboard = () => {
             >
               <AmountBorrowed
                 text="Credit Amount received"
-              amount="760.45"
+              amount={totalAmountGet}
               // iscash = {false}
               />
             </Grid>
@@ -121,7 +129,7 @@ const Dashboard = () => {
             >
               <TasksProgress
               text="Your Campaign Progress"
-              percent={70}
+              percent={campaignProgress*100}
                />
             </Grid>
           )
@@ -137,7 +145,7 @@ const Dashboard = () => {
             >
               <AmountBorrowed
                 text="Amount Repaid"
-                amount="5,000"
+                amount={amountRepayed}
               />
             </Grid>
           )

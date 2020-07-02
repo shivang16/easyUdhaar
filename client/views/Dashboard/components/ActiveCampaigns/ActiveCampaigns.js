@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -21,6 +21,8 @@ import {
 // import {theme} from '.';
 
 import mockData from './data';
+import auth from './../../../../auth/auth-helper';
+import { dashboard } from './../../../../auth/api-dashboard';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -58,6 +60,28 @@ const ActiveCampaigns = props => {
 
   const [orders, setOrders] = useState(mockData);
 
+  const [myprops, setMyprops] = useState([]);
+  const userSession = JSON.parse(auth.getJWT());
+  const token = userSession.token;
+  const role = userSession.user.role;
+  
+  // console.log(myprops);
+
+  useEffect(() => {
+    dashboard(token).then((data) => {
+      if (data && data.error) {
+        console.log(data.error);
+      } else {
+        setMyprops(data);
+      }
+    });
+  }, []);
+
+  let lenderData;
+  if(myprops.returnObject) {
+    lenderData = myprops.returnObject.campaignLenders.campaignId;
+  }
+
   return (
     <Card
       {...rest}
@@ -75,7 +99,8 @@ const ActiveCampaigns = props => {
               <TableHead>
                 <TableRow>
                   <TableCell>Lender ID</TableCell>
-                    <TableCell>Required Amount</TableCell>
+                    <TableCell>Amount Given</TableCell>
+                    <TableCell>Amount Pending</TableCell>
                   <TableCell sortDirection="desc">
                     <Tooltip
                       enterDelay={300}
@@ -93,15 +118,16 @@ const ActiveCampaigns = props => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map(order => (
+                { lenderData && lenderData.map(lender => (
                   <TableRow
                     hover
-                    key={order.id}
+                    key={lender.lendingId}
                   >
-                    <TableCell>{order.ref}</TableCell>
-                    <TableCell>{order.customer.name}</TableCell>
+                    <TableCell>{lender.lendingId}</TableCell>
+                    <TableCell>{lender.amountGiven}</TableCell>
+                    <TableCell>{lender.amountPending}</TableCell>
                     <TableCell>
-                      {moment(order.createdAt).format('DD/MM/YYYY')}
+                      {lender.dueDate}
                     </TableCell>
                     <TableCell>
                       <div className={classes.statusContainer}>

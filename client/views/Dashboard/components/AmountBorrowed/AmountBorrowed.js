@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import MoneyIcon from '@material-ui/icons/Money';
+import auth from './../../../../auth/auth-helper';
+import { dashboard } from './../../../../auth/api-dashboard';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,6 +48,24 @@ const AmountBorrowed = props => {
   const myText = props.text;
   const myAmount = props.amount;
   const iscash =true;
+
+  // const [myprops, setMyprops] = useState([]);
+  // const userSession = JSON.parse(auth.getJWT());
+  // const token = userSession.token;
+  
+  // console.log(myprops);
+
+  // useEffect(() => {
+  //   dashboard(token).then((data) => {
+  //     if (data && data.error) {
+  //       console.log(data.error);
+  //     } else {
+  //       setMyprops(data);
+  //     }
+  //   });
+  // }, []);
+
+
   return (
     <Card
       {...rest}
