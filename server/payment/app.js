@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 //Connect to DB
 dotenv.config();
-mongoose.connect("mongodb+srv://shivang:shivang16@cluster0-ijlmb.mongodb.net/projectData?retryWrites=true&w=majority",{useUnifiedTopology: true,useNewUrlParser: true  },function(){
+mongoose.connect("process.env.DB_CONNECT",{useUnifiedTopology: true,useNewUrlParser: true  },function(){
     
 console.log("DB CONNECTED!!");
 });
