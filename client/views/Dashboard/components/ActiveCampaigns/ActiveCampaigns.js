@@ -23,6 +23,15 @@ import {
 import mockData from './data';
 import auth from './../../../../auth/auth-helper';
 import { dashboard } from './../../../../auth/api-dashboard';
+import { repay } from './../../../../auth/api-payment';
+// import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -57,15 +66,28 @@ const ActiveCampaigns = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const [amountgiven, setAmountgiven] = React.useState(0);
+  const [lendDataId, setLendDataId] = React.useState('');
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  //   dataId
+  // };
 
-  const [orders, setOrders] = useState(mockData);
+  const handleClose = () => {
+    setOpen(false);
+  };
 
+  const handleChange = event => {
+    setAmountgiven(event.target.value);
+  }
+
+  // const [orders, setOrders] = useState(mockData);
+  // let dataId;
   const [myprops, setMyprops] = useState([]);
   const userSession = JSON.parse(auth.getJWT());
   const token = userSession.token;
   const role = userSession.user.role;
-  
-  // console.log(myprops);
 
   useEffect(() => {
     dashboard(token).then((data) => {
@@ -77,10 +99,31 @@ const ActiveCampaigns = props => {
     });
   }, []);
 
+  const handleRepay = (event) => {
+    event.preventDefault();
+    const waladata = {
+      lendingId: lendDataId,
+      amountGiven: Number(amountgiven)
+    }
+    console.log(waladata);
+    // handleClose();
+    repay(token, waladata).then((data) => {
+      if(data && data.error) {
+        console.log(data.error);
+      } else {
+        console.log(data);
+        handleClose();
+      }
+    });
+    
+  }
+
   let lenderData;
   if(myprops.returnObject) {
     lenderData = myprops.returnObject.campaignLenders.campaignId;
   }
+
+
 
   return (
     <Card
@@ -134,10 +177,39 @@ const ActiveCampaigns = props => {
                         <Button
                           color="blue"
                           variant="outlined"
+                          onClick={() => {
+                            setLendDataId(lender.lendingId);
+                            setOpen(true);
+                          }}
                         >
                           Repay
                         </Button>
                       </div>
+                      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                        <DialogContent>
+                          <DialogContentText>
+                            To subscribe to this website, please enter your email address here. We will send updates
+                            occasionally.
+                          </DialogContentText>
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="amount"
+                            label="Enter Amount"
+                            fullWidth
+                            onChange={handleChange}
+                          />
+                        </DialogContent>
+                        <DialogActions>
+                          <Button onClick={handleClose} color="primary">
+                            Cancel
+                          </Button>
+                          <Button onClick={handleRepay} color="primary">
+                            Make Payment
+                          </Button>
+                        </DialogActions>
+                      </Dialog>
                     </TableCell>
                   </TableRow>
                 ))}
