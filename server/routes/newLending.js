@@ -50,10 +50,6 @@ router.post('/',verify,async (req,res)=>{
         lender.lendingStarted = true;
         //   Amount expected in given campaign will reduce!
         currectCampaign.amountExpected -= amountGiven;
-        if(currectCampaign.amountExpected==0)
-        {
-            currectCampaign.running = false;
-        }
         currectCampaign.amountDue += amountGiven;
         currectCampaign.amountGet += amountGiven;
 

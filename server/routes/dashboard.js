@@ -26,7 +26,6 @@ router.get('/',verify,async (req,res)=>{
             var lendingHistory = [];
             for(var i=0;i<data.length;i++)
             {
-                totalLending++;
                 totalAmountLend+=data[i].amountGiven;
                 totalAmountRecived+=(data[i].amountGiven-data[i].amountToBeRecieved);
                 const transactionId = "LID"+String(Math.floor(1000+Math.random()*(8999)));
@@ -35,6 +34,7 @@ router.get('/',verify,async (req,res)=>{
                 const campaignOwner = await User.findOne({_id:currentCampaign.borrowerId});
                 if(campaignOwner!=null)
                 {
+                    totalLending++;
                     var temp = {
                         "transactionId":transactionId,
                         "lendingDate":data[i].dateLending,
@@ -96,8 +96,8 @@ router.get('/',verify,async (req,res)=>{
                             "amountPending":lenderList[j].amountToBeRecieved,
                             "dueDate": randomDate
                         }
+                        if(lenderList[j].amountToBeRecieved == 0) continue;
                         lndrlst.push(temp);
-                        
                     }
                     campaignHistory["campaignId"] = lndrlst;
                 }
