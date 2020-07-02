@@ -56,11 +56,11 @@ const userScheme = new mongoose.Schema({
     },
     creditScoreBusiness:{
         type: Number,
-        default:400,
+        default:0,
     },
     creditScorePersonal:{
         type:Number,
-        default:300
+        default:0
     },
     job:{
         type: String,
