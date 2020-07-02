@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
   },
   horiz : {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     padding: 0, 
   },
   card : {
