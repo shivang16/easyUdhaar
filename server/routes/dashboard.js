@@ -99,7 +99,7 @@ router.get('/',verify,async (req,res)=>{
                         lndrlst.push(temp);
                         
                     }
-                    campaignHistory[campaignList[i]._id] = lndrlst;
+                    campaignHistory["campaignId"] = lndrlst;
                 }
             }
            
