@@ -91,7 +91,7 @@ router.get('/',verify,async (req,res)=>{
                     {
                         var randomDate = String(Math.floor(1+Math.random()*27))+"/"+String(Math.floor(1+Math.random()*11))+"/"+String(Math.floor(2021+Math.random(2024)));
                         var temp = {
-                            "lendingId":lenderList[j].lenderId,
+                            "lendingId":lenderList[j]._id,
                             "amountGiven":lenderList[j].amountGiven,
                             "amountPending":lenderList[j].amountToBeRecieved,
                             "dueDate": randomDate

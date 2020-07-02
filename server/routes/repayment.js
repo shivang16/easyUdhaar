@@ -9,19 +9,20 @@ const rp = require('request-promise');
 const Transaction = require('../model/Transaction');
 
 router.post('/',verify,async (req,res)=>{
-    
+    console.log("i am in repayment");    
     const currentUser = await User.findOne({_id:req.user._id});
-
+    console.log(currentUser.firstName);
+    console.log(req.body);
     // Creating New User And saving in Database
     const {lendingId,amountGiven} = req.body;  
    
     const currentLending = await Lender.findOne({_id:lendingId});
-
+    console.log(currentLending);
     if(amountGiven > currentLending.amountToBeRecieved) return res.json({message:"cannot pay more amount than expected"});
 
     const currentCampaign = await Campaign.findOne({_id:currentLending.campaignId}) 
     const campaignOwner = await User.findOne({_id:currentCampaign.borrowerId});
-       
+    console.log("Hello");
     var options = {
         method: 'POST',
         headers:{
@@ -38,7 +39,7 @@ router.post('/',verify,async (req,res)=>{
 
     let response = await rp(options)
     .then(async function (parsedBody) {
-
+        console.log("I passed VISA Direct");
         currentCampaign.amountDue-=amountGiven;
         currentCampaign.amountPaid+=amountGiven;
         if(currentCampaign.amountDue ==0)
