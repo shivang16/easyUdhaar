@@ -160,7 +160,7 @@ const Dashboard = () => {
               xs={12}
             >
               <TasksProgress
-              text="Return on Investment"
+              text="Percentage of Investment Returned"
               percent = {percent.toPrecision(2)}
                />
             </Grid>

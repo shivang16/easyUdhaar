@@ -171,7 +171,7 @@ const ExploreCard = (props) => {
               </div>
             </div>
             <div style={{ paddingTop: '2px' }}>
-              <Typography>Campaign Progress: {campaignProgress}%</Typography>
+              <Typography>Campaign Progress: {Math.trunc(campaignProgress)}%</Typography>
 
               <LinearProgress
                 className={classes.progress}
