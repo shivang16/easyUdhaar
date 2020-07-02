@@ -58,7 +58,7 @@ const Confirm = ({ handleNext, handleBack,
 				cibilScore: "876",
 				purpose: Purpose || undefined
 			}
-			console.log(formData);
+			// console.log(formData);
 			const userSession = JSON.parse(auth.getJWT());
 			const token = userSession.token;
 			// handleNext();

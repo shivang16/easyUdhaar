@@ -112,14 +112,14 @@ const ExploreCard = (props) => {
         campaignId: campaignId,
         amountGiven: Number(amountgiven)
       };
-      console.log(lenddata);
+      // console.log(lenddata);
       lend(token, lenddata).then((data) => {
         if(data.error) {
           console.log(data.error);
         }
         else {
           alert("Lending Successful.");
-          console.log(data);
+          // console.log(data);
         }
       })
 
