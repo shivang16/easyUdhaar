@@ -29,7 +29,7 @@ const Confirm = ({ handleNext, handleBack, values }) => {
 			goods: values.Supply_of_goods || undefined,
 
 		}
-		console.log(formData);
+		// console.log(formData);
 		const userSession = JSON.parse(auth.getJWT());
 		const token = userSession.token;
 		// handleNext();

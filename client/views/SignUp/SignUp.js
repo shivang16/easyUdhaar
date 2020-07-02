@@ -92,7 +92,7 @@ const SignUp = () => {
       phoneNo: values.phone || undefined,
       balance: values.balance || undefined
     };
-    console.log(user);
+    // console.log(user);
     signup(user).then((data) => {
       if(data.error) {
         setValues({ ...values, error: data.error });

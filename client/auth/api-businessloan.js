@@ -13,7 +13,7 @@ const business = async (token, formData) => {
       });
       return await response.json();
     } catch(err) {
-        console.log("I am ironman");
+        // console.log("I am ironman");
       console.log(err);
     }
   };
@@ -33,7 +33,7 @@ const personal = async (token, formData) => {
     });
     return await response.json();
   } catch(err) {
-      console.log("I am ironman");
+      // console.log("I am ironman");
     console.log(err);
   }
 };
