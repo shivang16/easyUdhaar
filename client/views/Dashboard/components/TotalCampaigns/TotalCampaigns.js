@@ -81,7 +81,7 @@ const TotalUsers = props => {
               gutterBottom
               variant="body2"
             >
-              Total Campaigns (Lent)
+              Lives impacted (Campaigns Lent To)
             </Typography>
             <Typography variant="h3">{myprops.totalLending}</Typography>
           </Grid>

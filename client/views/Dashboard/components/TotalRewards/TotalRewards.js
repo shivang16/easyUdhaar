@@ -58,7 +58,7 @@ const TotalRewards = props => {
               // color="inherit"
               variant="h3"
             >
-              <p>&#x20B9; 23,200</p>
+              <p>&#x20B9; 556</p>
             </Typography>
           </Grid>
           <Grid item>
@@ -74,7 +74,7 @@ const TotalRewards = props => {
               // color="inherit"
               variant="h3"
             >
-              <p>&#x20B9; 23,200</p>
+              <p>&#x20B9; 221</p>
             </Typography>
           </Grid>
         </Grid>
