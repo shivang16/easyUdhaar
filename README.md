@@ -111,7 +111,7 @@ easyUdhaar is a **microlending** startup that **uses financial and non-financial
   </tr>
 </table>
 
-
+ Repository for [Credit Score API](https://github.com/NITT-Ctrl-Alt-Defeat/credit-score)
 
 ## Types of Users:
 
