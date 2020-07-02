@@ -2,6 +2,8 @@
 /dist/
 /data/
 /server/cred/
+/server/payment/cred/
+/server/payment/credentials.json
 /server/credentials.json
 npm-debug.log
 .env
