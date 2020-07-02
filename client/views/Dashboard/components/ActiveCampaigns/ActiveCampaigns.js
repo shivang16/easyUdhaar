@@ -113,6 +113,7 @@ const ActiveCampaigns = props => {
       } else {
         // console.log(data);
         handleClose();
+        alert("Repayment successful!");
       }
     });
     
@@ -186,11 +187,10 @@ const ActiveCampaigns = props => {
                         </Button>
                       </div>
                       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+                        <DialogTitle id="form-dialog-title">Repayment of the Lending amount</DialogTitle>
                         <DialogContent>
                           <DialogContentText>
-                            To subscribe to this website, please enter your email address here. We will send updates
-                            occasionally.
+                            Enter the amount that is to be repaid:
                           </DialogContentText>
                           <TextField
                             autoFocus
