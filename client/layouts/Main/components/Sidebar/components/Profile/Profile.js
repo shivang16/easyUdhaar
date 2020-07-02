@@ -79,7 +79,7 @@ const Profile = props => {
             <div style={{padding:"5px"}}>
                 <Typography variant="body2">Personal Credit Score</Typography>
             </div>
-          <Typography variant="h2">{personal}</Typography>
+          <Typography variant="h2">{Math.trunc(personal)}</Typography>
           </Button>
         )
       }
