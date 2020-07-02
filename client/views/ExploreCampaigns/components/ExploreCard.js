@@ -88,13 +88,13 @@ const ExploreCard = (props) => {
     const title = props.title;
     
     const descriptions = [
-      'to buy compost and fertilizers for maintaining five plots of coffee for harvest. As a result, she will be able to obtain better crop output.',
+      'To buy compost and fertilizers for maintaining five plots of coffee for harvest. As a result, she will be able to obtain better crop output.',
       'Seeking a loan to purchase another quality breed of dairy cow that will help in producing milk and manure to be used on her farm. Milk from the cow will be sold to the local market, and this will mean improved cash flow',
-      'helps to buy taro roots and banana tube (seedlings), and chemicals, a backpack sprayer, and chainsaw.',
-      'helps to buy fertilizers and potato seeds to cultivate it in the new season.',
-      'helps to buy seeds, fertiliser and pesticide in order to grow corn.',
-      'helps a woman-owned business overcome the challenges posed by the COVID-19 crisis.',
-      'helps to pay his educational fees at the university.',
+      'Helps to buy taro roots and banana tube (seedlings), and chemicals, a backpack sprayer, and chainsaw.',
+      'Helps to buy fertilizers and potato seeds to cultivate it in the new season.',
+      'Helps to buy seeds, fertiliser and pesticide in order to grow corn.',
+      'Helps a woman-owned business overcome the challenges posed by the COVID-19 crisis.',
+      'Helps to pay his educational fees at the university.',
     ];
     const desc = props.index%descriptions.length;
 
