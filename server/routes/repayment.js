@@ -17,7 +17,7 @@ router.post('/',verify,async (req,res)=>{
    
     const currentLending = await Lender.findOne({_id:lendingId});
 
-    if(amountGiven > currentLending.amountToBeRecieved) return res.send("You cannot repay more amount than expected");
+    if(amountGiven > currentLending.amountToBeRecieved) return res.json({message:"cannot pay more amount than expected"});
 
     const currentCampaign = await Campaign.findOne({_id:currentLending.campaignId}) 
     const campaignOwner = await User.findOne({_id:currentCampaign.borrowerId});
@@ -67,7 +67,7 @@ router.post('/',verify,async (req,res)=>{
         let transactionModel = new Transaction(transaction);
         await transactionModel.save();
         await campaignOwner.save();
-        res.send(currentLending);
+        return res.json({message:"payment successful"});
    })
    .catch(function (err) {
         return res.send("Error: "+ err);

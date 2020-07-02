@@ -18,7 +18,7 @@ router.post('/',verify,async (req,res)=>{
    
     const currectCampaign = await Campaign.findOne({_id:campaignId});
 
-    if(amountGiven > currectCampaign.amountExpected) return res.send("You cannot lend more amount than expected");
+    if(amountGiven > currectCampaign.amountExpected) return res.json({message:"You cannot lend more amount than expected"});
 
 
     const campaignOwnerId = currectCampaign.borrowerId;
@@ -81,7 +81,7 @@ router.post('/',verify,async (req,res)=>{
         await transactionModel.save();
         
 
-        res.send(lenderModel);
+        return res.json({message:"payment done"});
 
         //res.send(parsedBody);
     
