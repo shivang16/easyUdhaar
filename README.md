@@ -94,7 +94,7 @@ easyUdhaar is a **microlending** startup that **uses financial and non-financial
    </td>
    <td>Javascript
    </td>
-   <td>NodeJS
+   <td>NodeJS, Express
    </td>
    <td>Local
    </td>
