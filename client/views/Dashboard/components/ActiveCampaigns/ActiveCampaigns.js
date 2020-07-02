@@ -105,13 +105,13 @@ const ActiveCampaigns = props => {
       lendingId: lendDataId,
       amountGiven: Number(amountgiven)
     }
-    console.log(waladata);
+    // console.log(waladata);
     // handleClose();
     repay(token, waladata).then((data) => {
       if(data && data.error) {
         console.log(data.error);
       } else {
-        console.log(data);
+        // console.log(data);
         handleClose();
       }
     });

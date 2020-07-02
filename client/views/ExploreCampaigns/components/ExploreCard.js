@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
@@ -25,6 +25,8 @@ import {
   // Avatar,
   LinearProgress
 } from '@material-ui/core';
+import { lend } from './../../../auth/api-payment';
+import auth from './../../../auth/auth-helper';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -67,6 +69,7 @@ const useStyles = makeStyles(theme => ({
 
 
 
+
 const ExploreCard = (props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -85,6 +88,35 @@ const ExploreCard = (props) => {
     const date= props.date;
     const title = props.title;
     const desc = props.desc;
+
+      const [amountgiven, setAmountgiven] = useState(0);
+      const userSession = JSON.parse(auth.getJWT());
+      const token = userSession.token;
+
+      const handleChange = event => {
+        setAmountgiven(event.target.value);
+      }
+
+    const handleLend = (event) => {
+      event.preventDefault();
+      const lenddata = {
+        campaignId: campaignId,
+        amountGiven: Number(amountgiven)
+      };
+      console.log(lenddata);
+      lend(token, lenddata).then((data) => {
+        if(data.error) {
+          console.log(data.error);
+        }
+        else {
+          alert("Lending Successful.");
+          console.log(data);
+        }
+      })
+
+    }
+
+
     return (
       <div className={classes.card}>
         <Card className={classes.root}>
@@ -149,10 +181,10 @@ const ExploreCard = (props) => {
               {/* <div style={{ flexDirection: "row" }}> */}
               <Grid>
                 <div className={classes.payText}>
-                  <TextField />
+                  <TextField onChange={handleChange}/>
                 </div>
                 <div className={classes.payText}>
-                  <Button width="30px" variant="outlined">
+                  <Button width="30px" variant="outlined" onClick={handleLend}>
                     Lend to {borrowerName}
                   </Button>
                 </div>
