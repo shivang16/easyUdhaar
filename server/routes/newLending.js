@@ -12,20 +12,11 @@ const Transaction = require('../model/Transaction')
 router.post('/',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
-    // if(currentUser.accountType==true)  return res.send("You are a borrower you can't lend");
-
-    // Checking if account is verified or not
-    // if(currentUser.profileVerified == false){
-    //     return res.send("Profile is not verified!");
-    // }
-  
-    //console.log(currentUser);
     
     // Creating New User And saving in Database
     const {campaignId,amountGiven} = req.body;  
    
     const currectCampaign = await Campaign.findOne({_id:campaignId});
-    console.log(currectCampaign);
 
     if(amountGiven > currectCampaign.amountExpected) return res.send("You cannot lend more amount than expected");
 
@@ -46,11 +37,10 @@ router.post('/',verify,async (req,res)=>{
         },
         json: true // Automatically stringifies the body to JSON
     };
-    //console.log("Hello");
+
     let response = await rp(options)
     .then(async function (parsedBody) {
-        //console.log(parsedBody);
-        console.log("Hii");
+
         let lender = {};
         lender.lenderId = currentUser._id;
         lender.campaignId = campaignId;
@@ -58,13 +48,7 @@ router.post('/',verify,async (req,res)=>{
         lender.amountToBeRecieved = amountGiven;
         lender.dateLending = Date.now();
         lender.lendingStarted = true;
-        // var currentDate = new Date(Date.now());
-        // currentDate.setMonth(currentDate.getMonth()+currectCampaign.duration);
-        // lender.endDate = currentDate;
-        // currentDate.setMonth(currentDate.getMonth()+6);
-    //    lender.finalEndDate = currectDate;
-    
-           //   Amount expected in given campaign will reduce!
+        //   Amount expected in given campaign will reduce!
         currectCampaign.amountExpected -= amountGiven;
         if(currectCampaign.amountExpected==0)
         {

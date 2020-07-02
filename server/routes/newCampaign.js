@@ -9,18 +9,11 @@ const BusinessQuestion = require('../model/BusinessQuestion');
 
 
 router.post('/business',verify,async (req,res)=>{
-    console.log("Arre bhai bhai bhai");
     const currentUser = await User.findOne({_id:req.user._id});
 
     if(currentUser.accountType==false)  return res.send("You are a lender you can't borrow");
-    console.log(currentUser);
-    // Checking if account is verified or not
-    // if(currentUser.profileVerified == false){
-    //     return res.send("Profile is not verified!");
-    // }
 
     if(currentUser.defaulter == true) return res.send("You are a defaulter!");
-    console.log(req.body);
 
     // Fetching data from body
     const {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
@@ -32,7 +25,6 @@ router.post('/business',verify,async (req,res)=>{
     if(validate_check) return res.status(400).send(validate_check);
 
     
-    console.log("yaha bhi aa gye hum");
 
     // Check if same type of loan is already taken by user
     // const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
@@ -67,7 +59,7 @@ router.post('/business',verify,async (req,res)=>{
 
         const validate_check2 = validator.businessQuestionValidation(Questions);
         if(validate_check2) return res.status(400).send(validate_check2);
-        console.log("endgame");
+        
         const parameters = {   
             "Age":age,
             "Job" : job, 
@@ -115,16 +107,13 @@ router.post('/business',verify,async (req,res)=>{
                     currentUser.creditScoreBusiness = apiScore;
                     currentUser.previousLoan = Date.now();
                     await currentUser.save();
-                    console.log(campaignModel);
-                    // res.send(campaignModel);
+                
                     return res.json({
                         creditScore: apiScore
                     });
         
                 }
                 else{
-                    console.log(apiScore);
-                    // res.send("Loan Not Approved");
                     return res.json({
                         message: "Loan Not Approved",
                         creditScore: apiScore
@@ -132,9 +121,7 @@ router.post('/business',verify,async (req,res)=>{
                 }
            })
            .catch(function (err) {
-               console.log("I am an error");
                 return res.send("Error: "+ err);
-                console.log(err);
                 // POST failed...
             });
     // }
@@ -144,13 +131,9 @@ router.post('/personal',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
     
-    // Checking if account is verified or not
-    // if(currentUser.profileVerified == false){
-    //     return res.send("Profile is not verified!");
-    // }
 
     // Checking if personal is defaulter or not
-    // if(currentUser.defaulter == true) return res.send("You are a defaulter!");
+    if(currentUser.defaulter == true) return res.send("You are a defaulter!");
 
 
     // Fetching data from body
@@ -245,7 +228,7 @@ router.post('/personal',verify,async (req,res)=>{
                 // POST succeeded...
                 const apiScore = parsedBody.results['credit-score'];
                 console.log(apiScore);
-                if(apiScore>150)
+                if(apiScore>120)
                 {
                 
                     console.log(apiScore);
@@ -278,7 +261,6 @@ router.post('/personal',verify,async (req,res)=>{
                 }
            })
            .catch(function (err) {
-               console.log("Hoo");
                 return res.send("Error: "+ err);
                 console.log(err);
                 // POST failed...

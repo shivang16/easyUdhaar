@@ -11,52 +11,57 @@ const { date } = require('@hapi/joi');
 router.get('/',verify,async (req,res)=>{
     const user = await User.findOne({_id:req.user._id});
 
+
+    // Lender side service
     if(user.accountType == false)
-    {
-        // Lender + history 
+    { 
         var totalAmountLend = 0;
         var totalAmountRecived = 0;
         var totalLending = 0;
-        await Lender.find({lenderId:user._id},async function (err,data) {
-        if(err) return res.send(err);
-        var lendingHistory = [];
-        for(var i=0;i<data.length;i++)
-        {
-            totalLending++;
-            totalAmountLend+=data[i].amountGiven;
-            totalAmountRecived+=(data[i].amountGiven-data[i].amountToBeRecieved);
-            const transactionId = "LID"+String(Math.floor(1000+Math.random()*(8999)));
-            const currentCampaign = await Campaign.findOne({_id:data[i].campaignId});
-            if(currentCampaign==null) continue;
-            const campaignOwner = await User.findOne({_id:currentCampaign.borrowerId});
-            if(campaignOwner!=null)
-            {
-                var temp = {
-                    "transactionId":transactionId,
-                    "lendingDate":data[i].dateLending,
-                    "status":data[i].repaymentDone,
-                    "name":campaignOwner.firstName
-                };
-                lendingHistory.push(temp);
-            
-            }
-            
-        }
-        var returnObject = {
-            "totalAmountLend":totalAmountLend,
-            "totalAmountRecived":totalAmountRecived,
-            "totalLending":totalLending,
-            "returnInvestment":700
-        };
         
-        returnObject["data"] = lendingHistory;
+        await Lender.find({lenderId:user._id},async function (err,data) {
+        
+            if(err) return res.send(err);
+            
+            var lendingHistory = [];
+            for(var i=0;i<data.length;i++)
+            {
+                totalLending++;
+                totalAmountLend+=data[i].amountGiven;
+                totalAmountRecived+=(data[i].amountGiven-data[i].amountToBeRecieved);
+                const transactionId = "LID"+String(Math.floor(1000+Math.random()*(8999)));
+                const currentCampaign = await Campaign.findOne({_id:data[i].campaignId});
+                if(currentCampaign==null) continue;
+                const campaignOwner = await User.findOne({_id:currentCampaign.borrowerId});
+                if(campaignOwner!=null)
+                {
+                    var temp = {
+                        "transactionId":transactionId,
+                        "lendingDate":data[i].dateLending,
+                        "status":data[i].repaymentDone,
+                        "name":campaignOwner.firstName
+                    };
+                    lendingHistory.push(temp);
+                
+                }
+                
+            }
+            var returnObject = {
+                "totalAmountLend":totalAmountLend,
+                "totalAmountRecived":totalAmountRecived,
+                "totalLending":totalLending,
+                "returnInvestment":700
+            };
+        
+            returnObject["data"] = lendingHistory;
 
 
         return res.json(returnObject);
-        //finalResponse['lending'] = returnObject;
-    });
+        });
 
     }
+
+    // Borrower side
     else
     {
         var totalAmountExpected = 0;
@@ -123,43 +128,40 @@ router.get('/',verify,async (req,res)=>{
 
 router.get('/exploreCampaigns',verify,async (req,res)=>{
     const currentUser = await User.findOne({_id:req.user._id});
-    console.log(currentUser);
-    //if(currentUser.accountType==true)  return res.send("You are a borr");
-
+    
     await Campaign.find({running:true},async (err,data)=>{
         if(err) return res.send("error: " + err);
         else
         {
             var finalObject = [];
-        for(var i=0;i<data.length;i++)
-        {
-            //console.log(data[i]);
-            const borrower = await User.findOne({_id:data[i].borrowerId})
-            if(borrower==null) continue;
-            const borrowerName = borrower.firstName + " " + borrower.lastName;
-            var cs;
-            if(data[i].loanType==1)
+            for(var i=0;i<data.length;i++)
             {
-                cs = borrower.creditScoreBusiness;
-            }
-            else
-            {
-                cs = borrower.creditScorePersonal;
-            }
-            const progress = (data[i].amountGet)/data[i].amount;
-            const temp = {
-                "borrowerName":borrowerName,
-                "creditScore":cs,
-                "campaignType":data[i].loanType,
-                "campaignProgress":progress,
-                "amountInital":data[i].amount,
-                "amountReq":data[i].amountExpected,
-                "campaignId":data[i]._id
-            };
-            finalObject.push(temp);
+                const borrower = await User.findOne({_id:data[i].borrowerId})
+                if(borrower==null) continue;
+                const borrowerName = borrower.firstName + " " + borrower.lastName;
+                var cs;
+                if(data[i].loanType==1)
+                {
+                    cs = borrower.creditScoreBusiness;
+                }
+                else
+                {
+                    cs = borrower.creditScorePersonal;
+                }
+                const progress = (data[i].amountGet)/data[i].amount;
+                const temp = {
+                    "borrowerName":borrowerName,
+                    "creditScore":cs,
+                    "campaignType":data[i].loanType,
+                    "campaignProgress":progress,
+                    "amountInital":data[i].amount,
+                    "amountReq":data[i].amountExpected,
+                    "campaignId":data[i]._id
+                };
+                finalObject.push(temp);
 
-        }
-        return res.json(finalObject);
+           }
+            return res.json(finalObject);
         }
         
     });

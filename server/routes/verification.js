@@ -14,12 +14,11 @@ const nexmo = new Nexmo({
 router.get('/profile',verify,async (req,res)=>{
     
   //check if profile is verified
-    const currentUser = await User.findOne({_id:req.user._id});
+  const currentUser = await User.findOne({_id:req.user._id});
     
     if(currentUser.profileVerified == false) 
     {
         res.send("Enter Different values for completing your profile");
-        //res.redirect("form") and this form submit will have post /profile
     }
     else{
         res.send("Account Already verified");
@@ -35,7 +34,8 @@ router.post('/profile',verify,async(req,res)=>{
             console.log("User Not Found! " + err);
         }
         else{
-            // Validation is required first add validation of input!!!
+  
+          // Validation is required first add validation of input!!!
               const validate_check = validator.profileValidation(req.body);
               if(validate_check) return res.status(400).send(validate_check);
 
@@ -55,8 +55,6 @@ router.post('/profile',verify,async(req,res)=>{
                 }
                 else{
                     res.send(currentUser);
-                    //res.redirect('/phone');
-                    // Phone Number input form  
                 }
             })
            
@@ -72,7 +70,6 @@ router.get('/phone',verify,async (req,res)=>{
     const currentUser = await User.findOne({_id:req.user._id});
     if(currentUser.phoneVerified==false){
       res.send("phone number not verified");
-        // input phone number and send it to post /phone/register 
     }
     else{
         res.send("Phone Number Already verified");
@@ -109,8 +106,6 @@ router.post('/phone/register',verify,async (req,res)=>{
         }
       }
     });
-    // !!!!!!!!!!Store request id someewhere and use it in check request
-    //res.redirect('/phone/check');
 });
 
 router.get('/phone/check',verify,(req,res)=>{
@@ -131,7 +126,6 @@ router.post('/phone/check',verify,(req,res)=>{
       if(err) {
         console.log(err);
   
-        //Oops! Something went wrong, respond with 500: Server Error
         res.status(500).send(err);
       } else {
         console.log(result)

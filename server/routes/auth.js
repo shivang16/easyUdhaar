@@ -72,7 +72,6 @@ router.post('/register',async (req,res)=>{
     const validate_check = validator.registrationValidation(req.body);
     if(validate_check) 
     {
-        console.log(validate_check);
         return res.status(400).json(validate_check);
     }
     
@@ -81,18 +80,12 @@ router.post('/register',async (req,res)=>{
     const emailExist = await User.findOne({email:req.body.email});
     if(emailExist) return res.status(400).send("Email Already exist");
 
-    // Checking if both the passwords match or not
-    // if(req.body.password != req.body.password1){
-    //     return res.status(400).send("Password does not match!!");
-    // }
-
     // Hashing password
     
     // Creating New User And saving in Database
     const {firstName,lastName,email,password,dob,accountNo,aadharNo,panNo,phoneNo,balance,accountType,} = req.body;
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
-    // email1=email;
     rand=Math.floor((Math.random() * 100) + 54);
     console.log("------------------------"+rand);
     host='localhost:3000/user'
@@ -104,7 +97,6 @@ router.post('/register',async (req,res)=>{
         html : getEmailTemplate(link) 
     }
 
-    //console.log(mailOptions);
     
     smtpTransport.sendMail(mailOptions, async function(error, response){
      if(error){
@@ -123,7 +115,6 @@ router.post('/register',async (req,res)=>{
             user.phoneNo = phoneNo;
             user.balance = balance;
             user.accountType = accountType;
-            // user.dob = dob;
             let userModel = new User(user);
             await userModel.save();
             console.log("Data Added to User Database!!");
@@ -156,9 +147,7 @@ router.post('/login',async (req,res)=>{
 
 
     const token = jwt.sign({_id:selected_user._id},process.env.TOKEN_SECRET);
-    //console.log(token);
     
-    // res.send(token);
     res.cookie("t", token, {
         expire: new Date() + 9999
       })

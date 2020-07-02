@@ -15,7 +15,6 @@ const registrationValidate = function(data){
         phoneNo: Joi.string().min(12).max(12).required(),
         balance: Joi.number().required(),
         accountType: Joi.bool()
-        // password1 : Joi.string().max(1024).required()
     });
 
     //Validating the user before use

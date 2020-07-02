@@ -13,9 +13,6 @@ router.post('/',async (req,res)=>{
     const sender = await User.findOne({_id:senderId});
     const reciver = await User.findOne({_id:reciverId});
 
-    // console.log(sender);
-    // console.log(reciver);
-
     if(sender.balance < amountTransfered){
         return res.status(500).send("Not enough amount to make this payment!");
     }
@@ -59,8 +56,7 @@ router.post('/',async (req,res)=>{
         console.log("Pull successful");
         sender.balance-=amountTransfered;
         await sender.save();
-        console.log(result_pull.response.body);
-
+    
         function getParameters_push() {
             var parameters = {
                 "Accept": "application/json",
@@ -99,10 +95,8 @@ router.post('/',async (req,res)=>{
         .then(async function(result_push) {
             // Put your custom logic here
             console.log("Push successful");
-            console.log(result_push.response.body);
             reciver.balance+=amountTransfered;
             await reciver.save();
-            //console.log("Done!");
             return res.send({"pull":result_pull,"push":result_push});
             
         })
@@ -157,7 +151,6 @@ router.post('/',async (req,res)=>{
                 console.log("Reverse Succesfull");
                 sender.balance+=amountTransfered;
                 await sender.save();
-                console.log(result_rev.response.body);
             })
             .catch(function(error_rev) {
                 console.log("Reverse Error");

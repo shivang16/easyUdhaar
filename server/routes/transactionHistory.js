@@ -5,10 +5,6 @@ const  validator = require('../validate');
 
 router.post('/',verify,async (req,res)=>{
 
-    //Validating 
-    // const validate_check = validator.transactionValidation(req.body);
-    // if(validate_check) return res.status(400).send(validate_check);
-
     // Creating New User And saving in Database
     const {lenderId, borrowerId, amount} = req.body;   // Here we don't need to add borrowerId it can be taken form token
     

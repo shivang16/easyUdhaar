@@ -10,16 +10,12 @@ const Transaction = require('../model/Transaction');
 
 router.post('/',verify,async (req,res)=>{
     
-    // Account verification completed?? 
     const currentUser = await User.findOne({_id:req.user._id});
 
-    //if(currentUser.accountType==false)  return res.send("You are a lender you can't repay");
-  
     // Creating New User And saving in Database
     const {lendingId,amountGiven} = req.body;  
    
     const currentLending = await Lender.findOne({_id:lendingId});
-    //console.log(currectCampaign);
 
     if(amountGiven > currentLending.amountToBeRecieved) return res.send("You cannot repay more amount than expected");
 
@@ -39,10 +35,10 @@ router.post('/',verify,async (req,res)=>{
         },
         json: true // Automatically stringifies the body to JSON
     };
-    //console.log("Hello");
+
     let response = await rp(options)
     .then(async function (parsedBody) {
-        //console.log(parsedBody);
+
         currentCampaign.amountDue-=amountGiven;
         currentCampaign.amountPaid+=amountGiven;
         if(currentCampaign.amountDue ==0)
@@ -57,7 +53,6 @@ router.post('/',verify,async (req,res)=>{
                 campaignOwner.personalLoan = false;
             }
         }
-        console.log("Goo");
         currentLending.amountToBeRecieved-=amountGiven;
         if(currentLending.amountToBeRecieved==0)
             currentLending.repaymentDone = true;
