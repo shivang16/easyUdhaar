@@ -75,7 +75,7 @@ const Profile = props => {
       </Typography>
       {
         role && (
-          <Button variant="outlined">
+          <Button >
             <div style={{padding:"5px"}}>
                 <Typography variant="body2">Personal Credit Score</Typography>
             </div>
@@ -85,11 +85,11 @@ const Profile = props => {
       }
       {
         role && (
-          <Button variant="outlined">
+          <Button >
             <div style={{padding:"5px"}}>
                 <Typography variant="body2">Business Credit Score</Typography>
             </div>
-          <Typography variant="h2">{business}</Typography>
+          <Typography variant="h2">{Math.trunc(business)}</Typography>
           </Button>
         )
       }
