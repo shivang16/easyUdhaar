@@ -129,7 +129,7 @@ const Dashboard = () => {
             >
               <TasksProgress
               text="Your Campaign Progress"
-              percent={campaignProgress*100}
+              percent={Math.trunc(campaignProgress*100)}
                />
             </Grid>
           )
