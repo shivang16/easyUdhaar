@@ -42,6 +42,7 @@ router.post('/',verify,async (req,res)=>{
         if(currentCampaign.amountDue ==0)
         {
             currentCampaign.loanRepay = true;
+            currentCampaign.running = false;
             if(currentCampaign.loanType==1)
             {
                 campaignOwner.businessLoan = false;

@@ -27,11 +27,11 @@ router.post('/business',verify,async (req,res)=>{
     
 
     // Check if same type of loan is already taken by user
-    // const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
-    // if(loanTaken != null){
-    //     return res.send("Loan Already taken");
-    // }
-    // else{
+    const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
+    if(loanTaken != null){
+        return res.send("Loan Already taken");
+    }
+    else{
         let campaign = {};
         campaign.borrowerId = currentUser._id;
         campaign.loanType = 1;
@@ -124,7 +124,7 @@ router.post('/business',verify,async (req,res)=>{
                 return res.send("Error: "+ err);
                 // POST failed...
             });
-    // }
+    }
 });
 
 router.post('/personal',verify,async (req,res)=>{
@@ -151,10 +151,10 @@ router.post('/personal',verify,async (req,res)=>{
 
     // Check if same type of loan is already taken by user
     const loanTaken = await User.findOne({_id:currentUser._id,personalLoan:true});
-    // if(loanTaken != null){
-    //     return res.send("Loan Already taken");
-    // }
-    // else{
+    if(loanTaken != null){
+        return res.send("Loan Already taken");
+    }
+    else{
         let campaign = {};
         campaign.borrowerId = currentUser._id;
         campaign.loanType = 2;
@@ -265,7 +265,7 @@ router.post('/personal',verify,async (req,res)=>{
                 console.log(err);
                 // POST failed...
             });
-    // }
+    }
 });
 
 module.exports = router;
