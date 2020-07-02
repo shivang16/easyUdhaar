@@ -89,7 +89,7 @@ const Topbar = ({ history }, props) => {
               </Menu>
             )
           }
-          <Button color="inherit">About Us</Button>
+          {/* <Button color="inherit">About Us</Button> */}
           <IconButton
             className={classes.signOutButton}
             color="inherit"
