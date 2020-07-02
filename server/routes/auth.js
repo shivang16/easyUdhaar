@@ -87,7 +87,7 @@ router.post('/register',async (req,res)=>{
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password,salt);
     rand=Math.floor((Math.random() * 100) + 54);
-    console.log("------------------------"+rand);
+    //console.log("------------------------"+rand);
     host='localhost:3000/user'
     link="http://"+host+"/verify?id="+rand;
     
@@ -103,7 +103,7 @@ router.post('/register',async (req,res)=>{
             console.log(error);
         res.end("error");
      }else{
-            console.log("Message sent: " + response.message);
+            //console.log("Message sent: " + response.message);
             let user = {};
             user.firstName = firstName;
             user.lastName = lastName;
