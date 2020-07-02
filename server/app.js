@@ -60,10 +60,6 @@ app.use('/transaction',transaction);
 app.use('/repayment',repayment);
 
 
-app.get('/',function(req,res){
-    res.send("Yoo");
-});
-
 app.get('*', (req, res) => {
     const sheets = new ServerStyleSheets()
     const context = {}
