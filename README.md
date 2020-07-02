@@ -47,7 +47,14 @@ easyUdhaar is a **microlending** startup that **uses financial and non-financial
 3. Run `npm run development`
 4. Project will be deployed on `http://localhost:3000/`
 
+## Deploying payment server:
 
+
+
+1. Run `cd easyUdhaar/server/payment`
+2. Run `npm install`
+3. Run `npm run server`
+4. Payment server will deployed on `https://localhost:4500/`
 ## TechStack:
 
 
