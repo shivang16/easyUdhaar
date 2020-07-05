@@ -11,9 +11,9 @@ const BusinessQuestion = require('../model/BusinessQuestion');
 router.post('/business',verify,async (req,res)=>{
     const currentUser = await User.findOne({_id:req.user._id});
 
-    if(currentUser.accountType==false)  return res.send("You are a lender you can't borrow");
+    if(currentUser.accountType==false)  return res.json({message:"You are a lender you can't borrow"});
 
-    if(currentUser.defaulter == true) return res.send("You are a defaulter!");
+    if(currentUser.defaulter == true) return res.json({message:"You are a defaulter"});
 
     // Fetching data from body
     const {amountExpected,businessIncome,employes,skilledEmployes,customerFacingBToB,
@@ -22,14 +22,14 @@ router.post('/business',verify,async (req,res)=>{
     
     //Validating campaign 
     const validate_check = validator.campaignValidation({"amountExpected":amountExpected});
-    if(validate_check) return res.status(400).send(validate_check);
+    if(validate_check) return res.status(400).json({message:validate_check});
 
     
 
     // Check if same type of loan is already taken by user
     const loanTaken = await User.findOne({_id:currentUser._id,businessLoan:true});
     if(loanTaken != null){
-        return res.send("Loan Already taken");
+        return res.json({message:"Loan already taken"});
     }
     else{
         let campaign = {};
@@ -109,7 +109,8 @@ router.post('/business',verify,async (req,res)=>{
                     await currentUser.save();
                 
                     return res.json({
-                        creditScore: apiScore
+                        creditScore: apiScore,
+                        message:"loan approved"
                     });
         
                 }
@@ -121,7 +122,7 @@ router.post('/business',verify,async (req,res)=>{
                 }
            })
            .catch(function (err) {
-                return res.send("Error: "+ err);
+                return res.json({message:"Error",error:err});
                 // POST failed...
             });
     }
@@ -130,10 +131,13 @@ router.post('/business',verify,async (req,res)=>{
 router.post('/personal',verify,async (req,res)=>{
     
     const currentUser = await User.findOne({_id:req.user._id});
+
+    if(currentUser.accountType==false)  return res.json({message:"You are a lender you can't borrow"});
+
     
 
     // Checking if personal is defaulter or not
-    if(currentUser.defaulter == true) return res.send("You are a defaulter!");
+    if(currentUser.defaulter == true) return res.json({message:"You are a defaulter!"});
 
 
     // Fetching data from body
@@ -144,7 +148,7 @@ router.post('/personal',verify,async (req,res)=>{
 
     //Validating campaign 
     const validate_check = validator.campaignValidation({"amountExpected":amountExpected});
-    if(validate_check) return res.status(400).send(validate_check);
+    if(validate_check) return res.status(400).json({message:validate_check});
 
 
     
@@ -152,7 +156,7 @@ router.post('/personal',verify,async (req,res)=>{
     // Check if same type of loan is already taken by user
     const loanTaken = await User.findOne({_id:currentUser._id,personalLoan:true});
     if(loanTaken != null){
-        return res.send("Loan Already taken");
+        return res.json({message:"Loan Already taken"});
     }
     else{
         let campaign = {};
@@ -248,20 +252,21 @@ router.post('/personal',verify,async (req,res)=>{
 
                     // res.send(campaignModel);
                     return res.json({
-                        creditScore: apiScore
+                        creditScore: apiScore,
+                        message:"loan approved"
                     });
                 
                 }
                 else{
                     // res.send("Loan Not Approved");
                     return res.json({
-                        message: "Loan Not Approves",
+                        message: "Loan Not Approved",
                         creditScore: apiScore
                     });
                 }
            })
            .catch(function (err) {
-                return res.send("Error: "+ err);
+            return res.json({message:"Error",error:err});
                 console.log(err);
                 // POST failed...
             });

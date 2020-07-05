@@ -69,7 +69,7 @@ router.post('/',verify,async (req,res)=>{
         return res.json({message:"payment successful"});
    })
    .catch(function (err) {
-        return res.send("Error: "+ err);
+    return res.json({message:"Error",error:err});
         console.log(err);
         // POST failed...
     });    

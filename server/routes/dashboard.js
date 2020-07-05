@@ -89,6 +89,7 @@ router.get('/',verify,async (req,res)=>{
                     var lndrlst = [];
                     for(var j=0;j<lenderList.length;j++)
                     {
+                        if(lenderList[j].repaymentDone==true) continue;
                         var randomDate = String(Math.floor(1+Math.random()*27))+"/"+String(Math.floor(1+Math.random()*11))+"/"+String(Math.floor(2021+Math.random(2024)));
                         var temp = {
                             "lendingId":lenderList[j]._id,
