@@ -113,7 +113,7 @@ const ActiveCampaigns = props => {
       } else {
         // console.log(data);
         handleClose();
-        alert("Repayment successful!");
+        alert(data.message);
       }
     });
     

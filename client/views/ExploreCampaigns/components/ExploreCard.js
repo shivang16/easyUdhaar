@@ -118,7 +118,7 @@ const ExploreCard = (props) => {
           console.log(data.error);
         }
         else {
-          alert("Lending Successful.");
+          alert(data.message);
           // console.log(data);
         }
       })
